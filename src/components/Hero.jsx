@@ -4,7 +4,7 @@ import { ReactTyped } from "react-typed";
 function Hero() {
   return (
     <div id="Home" className="text-white">
-      <div className=" mt-[-100px] w-full h-screen mx-auto text-center flex flex-col justify-center">
+      <div className=" mt-[-95px] w-full h-screen mx-auto text-center flex flex-col justify-center">
         <h1 className="text-green-300 text-sm md:text-lg">
           DIN GROSSIST NÄR KÖKET FÅR BESTÄMMA
         </h1>

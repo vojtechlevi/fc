@@ -10,7 +10,7 @@ function Navbar() {
   };
 
   return (
-    <div className="text-white sticky top-0 left-0 bg-[#0a0a0a] flex justify-between items-center h-24 w-full mx-auto px-4 lg:px-20">
+    <div className="text-white bg-[#0a0a0a] flex justify-between items-center h-24 w-full mx-auto px-4 lg:px-20">
       <div className="flex items-center">
         <img src={logo} alt="Fruktcentralen" className="w-12" />
         <div className="ml-2">
@@ -38,7 +38,7 @@ function Navbar() {
       <div
         className={
           !showMenu
-            ? "bg-[#0a0a0a] z-1 fixed right-0 top-24 w-[100%] h-full border-l border-l-gray-900 ease duration-500 md:hidden"
+            ? "bg-[#0a0a0a] fixed right-0 top-24 w-[100%] h-full border-l border-l-gray-900 ease duration-500 md:hidden"
             : "fixed right-[-100%]"
         }
       >
