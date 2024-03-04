@@ -10,7 +10,7 @@ function Footer() {
     >
       <div className="flex justify-around">
         <div className="text-white text-xs h-32 flex flex-col justify-center">
-          <div className="flex justify-center mt-10 gap-10">
+          {/* <div className="flex flex-col justify-center mt-10 gap-10 md:flex-row">
             <a href="#Home">
               <img src={logo} alt="Fruktcentralen logo" className="w-10" />
             </a>
@@ -26,7 +26,7 @@ function Footer() {
             >
               <FaFacebook size={25} color="black" />
             </a>
-          </div>
+          </div> */}
         </div>
 
         <div className="text-white text-xs text-center h-32 justify-between flex flex-col">

@@ -10,7 +10,6 @@ function App() {
     <div>
       <Navbar />
       <Hero />
-      <Test />
       <About />
       <Footer />
     </div>
