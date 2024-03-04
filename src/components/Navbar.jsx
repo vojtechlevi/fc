@@ -7,6 +7,7 @@ function Navbar() {
 
   const handleMenu = () => {
     setShowMenu(!showMenu);
+    document.body.classList.toggle("overflow-hidden");
   };
 
   return (
@@ -32,14 +33,14 @@ function Navbar() {
       </ul>
 
       <div onClick={handleMenu} className="block cursor-pointer md:hidden">
-        {!showMenu ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
+        {showMenu ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
       </div>
 
       <div
         className={
           !showMenu
-            ? "bg-[#0a0a0a] fixed right-0 top-24 w-[100%] h-full border-l border-l-gray-900 ease duration-500 md:hidden"
-            : "fixed right-[-100%]"
+            ? "fixed right-[-100%]"
+            : "bg-[#0a0a0a] overscroll-y-none fixed right-0 top-24 w-[100%] h-full border-l border-l-gray-900 ease duration-500 md:hidden"
         }
       >
         <ul className="pt-24 uppercase md:hidden text-center tracking-widest">
