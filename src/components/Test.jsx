@@ -11,7 +11,7 @@ function Test() {
         className={
           inView1
             ? "opacity-100 transition-all duration-[1s] delay-[200ms] "
-            : "opacity-0 transition-all duration-500 transform -translate-x-[100%]"
+            : "opacity-0 transition-all duration-500"
         }
       >
         <p className=" font-bold text-md md:text-2xl">
@@ -25,7 +25,7 @@ function Test() {
         className={
           inView1
             ? "opacity-100 transition-all duration-[1s] delay-[400ms]"
-            : "opacity-0 transition-all duration-500 transform -translate-x-[100%]"
+            : "opacity-0 transition-all duration-500"
         }
       >
         <p className=" font-bold text-md md:text-2xl">
@@ -39,7 +39,7 @@ function Test() {
         className={
           inView1
             ? "opacity-100 transition-all duration-[1s] delay-[600ms]"
-            : "opacity-0 transition-all duration-500 transform -translate-x-[100%]"
+            : "opacity-0 transition-all duration-500"
         }
       >
         <p className=" font-bold text-md md:text-2xl">
