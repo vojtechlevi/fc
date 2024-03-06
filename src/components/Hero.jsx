@@ -1,6 +1,5 @@
 import React from "react";
 import image from "../assets/pexels-mark-stebnicki-2749165.jpg";
-import Test from "./Test";
 import { ReactTyped } from "react-typed";
 
 function Hero() {
@@ -8,7 +7,7 @@ function Hero() {
     <div id="Home" className="text-white">
       <div className=" mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center ">
         <img
-          className="w-full h-full object-cover absolute top-0 left-0 -z-10 border-none opacity-60"
+          className="w-full h-full object-cover absolute top-0 left-0 -z-10 border-none opacity-70"
           src={image}
           alt="farm"
           srcset=""
