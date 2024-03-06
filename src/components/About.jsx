@@ -11,9 +11,9 @@ function About() {
     <>
       <div
         id="About"
-        className=" text-white w-full h-screen relative flex flex-col justify-center "
+        className=" text-white w-full h-screen relative flex flex-col justify-center"
       >
-        <div className=" relative bg-[rgb(30,30,30)] w-[90%] mx-auto flex justify-center items-center my-10 p-10 rounded-[20px]">
+        <div className=" relative bg-[rgb(30,30,30)] w-[90%] mx-auto flex my-10 p-10 rounded-[20px]">
           <img
             src={placeholder}
             alt=""
