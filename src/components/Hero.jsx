@@ -7,7 +7,7 @@ function Hero() {
     <div id="Home" className="text-white">
       <div className=" mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center ">
         <img
-          className="w-full h-full object-cover absolute top-0 left-0 -z-10 border-none opacity-70"
+          className="w-full h-full object-cover absolute top-0 left-0 -z-10 border-none opacity-80"
           src={image}
           alt="farm"
           srcset=""

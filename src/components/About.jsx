@@ -11,7 +11,7 @@ function About() {
     <>
       <div
         id="About"
-        className=" text-white w-full h-screen justify-around relative flex flex-col"
+        className=" bg-[rgb(24,24,24)] text-white w-full h-screen justify-around relative flex flex-col"
       >
         <div className=" relative justify-center  mx-auto flex py-10 px-2 rounded-[20px]">
           <img
