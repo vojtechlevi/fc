@@ -11,7 +11,7 @@ function About() {
     <>
       <div
         id="About"
-        className=" bg-[rgb(24,24,24)] text-white w-full h-screen justify-around relative flex flex-col"
+        className=" bg-[rgb(24,24,24)] text-white w-full justify-around flex flex-col"
       >
         <div className=" relative justify-center  mx-auto flex py-10 px-2 rounded-[20px]">
           <img
@@ -35,7 +35,7 @@ function About() {
             </p>
           </div>
         </div>
-        <div className=" bg-[rgb(30,30,30)] w-[95%] mx-auto flex justify-center items-center mb-10 py-10 px-1 rounded-[20px]">
+        <div className=" bg-[rgb(30,30,30)] w-[95%] mx-auto flex justify-center items-center mt-5 mb-10 py-10 px-1 rounded-[20px]">
           <div className="w-full text-center">
             <h2 className=" font-bold text-md md:text-2xl">
               Varför ska ni välja oss?
@@ -47,8 +47,10 @@ function About() {
                   <p className=" font-bold text-xs ml-2 md:text-lg">Prisvärt</p>
                 </div>
                 <p className="text-[8px] max-w-[100px] mt-1 md:flex md:max-w-[200px] md:text-sm">
-                  Konkurrenskraftiga priser för kvalitativa produkter, stödjer
-                  din verksamhet ekonomiskt.
+                  {/* Konkurrenskraftiga priser för kvalitativa produkter, stödjer
+                  din verksamhet ekonomiskt. */}
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laboriosam, impedit?
                 </p>
               </div>
               <div className="">
@@ -59,8 +61,10 @@ function About() {
                   </p>
                 </div>
                 <p className="text-[8px] max-w-[100px] mt-1 md:flex md:max-w-[200px] md:text-sm">
-                  Små eller stora, standard eller special. Vi anpassar oss efter
-                  dina behov.
+                  {/* Små eller stora, standard eller special. Vi anpassar oss efter
+                  dina behov. */}
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laboriosam, impedit?
                 </p>
               </div>
               <div className="">
@@ -69,8 +73,10 @@ function About() {
                   <p className=" font-bold text-xs ml-1 md:text-lg">Service</p>
                 </div>
                 <p className="text-[8px] max-w-[100px] mt-1 md:flex md:max-w-[200px] md:text-sm">
-                  Små eller stora, standard eller special - vi anpassar oss
-                  efter dina behov.
+                  {/* Små eller stora, standard eller special - vi anpassar oss
+                  efter dina behov. */}
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laboriosam, impedit?
                 </p>
               </div>
             </div>
