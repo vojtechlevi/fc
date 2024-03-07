@@ -11,7 +11,7 @@ function About() {
     <>
       <div
         id="About"
-        className=" bg-[rgb(24,24,24)] text-white w-full justify-around flex flex-col"
+        className=" bg-[rgb(24,24,24)] text-white w-full h-screen justify-around flex flex-col"
       >
         <div className=" relative justify-center  mx-auto flex py-10 px-2 rounded-[20px]">
           <img
@@ -35,7 +35,7 @@ function About() {
             </p>
           </div>
         </div>
-        <div className=" bg-[rgb(30,30,30)] w-[95%] mx-auto flex justify-center items-center mt-5 mb-10 py-10 px-1 rounded-[20px]">
+        <div className=" bg-[rgb(30,30,30)] w-[95%] mx-auto flex justify-center items-center mb-10 py-10 px-1 rounded-[20px]">
           <div className="w-full text-center">
             <h2 className=" font-bold text-md md:text-2xl">
               Varför ska ni välja oss?

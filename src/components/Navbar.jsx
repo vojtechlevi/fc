@@ -15,11 +15,11 @@ function Navbar() {
       <div
         className={
           !showMenu
-            ? "text-white relative z-20 flex justify-between items-center h-24 w-full mx-auto px-4 lg:px-20"
-            : " bg-[#0a0a0a] relative z-20 duration-[400ms] text-white flex justify-between items-center h-24 w-full mx-auto px-4 lg:px-20 md:bg-transparent"
+            ? "text-white absolute top-0 left-0 z-20 flex justify-between items-center h-24 w-full mx-auto px-4 lg:px-20"
+            : " absolute top-0 left-0 z-20 duration-[400ms] text-white flex justify-between items-center h-24 w-full mx-auto px-4 lg:px-20 md:bg-transparent"
         }
       >
-        <div className="flex items-center">
+        <div className="flex items-center ">
           <img src={logo} alt="Fruktcentralen" className="w-12 " />
           <div className="ml-2">
             <h1 className="w-full text-xl md:text-3xl font-bold">
@@ -52,8 +52,8 @@ function Navbar() {
       <div
         className={
           !showMenu
-            ? " fixed z-10 top-[-100%] bg-[#0a0a0a]"
-            : ` fixed bg-[#0a0a0a] z-10 right-0 top-24 w-[100%] h-full duration-[1s] md:hidden `
+            ? " fixed z-10 top-[-100%] h-screen bg-[#0a0a0a] opacity-0"
+            : ` fixed bg-[#0a0a0a] z-10 right-0 top-0 w-[100%] opacity-100 h-screen duration-[1s] md:hidden `
         }
       >
         <ul className=" pt-52 text-white uppercase md:hidden text-center tracking-widest">
