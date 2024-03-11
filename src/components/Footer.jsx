@@ -1,6 +1,5 @@
 import React from "react";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
-import logo from "../assets/logo.png";
 
 function Footer() {
   return (
@@ -21,8 +20,7 @@ function Footer() {
             <h2 className="font-bold uppercase">Kontakt</h2>
             <p>031-22 56 90</p>
             <p>info@fruktcentralen.se</p>
-            <p>Tagenevägen 34A</p>
-            <p>417 05 Göteborg</p>
+            <p>Tagenevägen 34A, 417 05 Göteborg</p>
           </div>
         </div>
         <div className=" mt-10 text-white flex flex-col jusitfy-center text-center">
@@ -33,17 +31,17 @@ function Footer() {
                   href="https://www.instagram.com/fruktcentralen/"
                   className=""
                 >
-                  <FaInstagram size={25} color="white" />
+                  <FaInstagram size={25} color="rgb(74 222 128)" />
                 </a>
                 <a href="https://www.facebook.com/fruktcentralen" className="">
-                  <FaFacebook size={25} color="white" />
+                  <FaFacebook size={25} color="rgb(74 222 128)" />
                 </a>
               </div>
             }
           </div>
           <div className="h-[1px] w-[80%] my-10 bg-white mx-auto"></div>
 
-          <p className="">© 2021 Fruktcentralen</p>
+          <p className="">© 2024 Fruktcentralen</p>
         </div>
       </div>
     </div>

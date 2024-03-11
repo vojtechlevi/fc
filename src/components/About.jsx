@@ -35,7 +35,7 @@ function About() {
             </p>
           </div>
         </div>
-        <div className=" bg-[rgb(30,30,30)] w-[95%] mx-auto flex justify-center items-center mb-10 py-10 px-1 rounded-[20px]">
+        <div className=" bg-[rgb(30,30,30)] w-[95%] lg:w-[80%] mx-auto flex justify-center items-center mb-10 py-10 px-1 rounded-[20px]">
           <div className="w-full text-center">
             <h2 className=" font-bold text-md md:text-2xl">
               Varför ska ni välja oss?
