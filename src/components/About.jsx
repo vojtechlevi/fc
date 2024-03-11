@@ -11,9 +11,9 @@ function About() {
     <>
       <div
         id="About"
-        className=" bg-[rgb(24,24,24)] text-white w-full h-screen justify-around flex flex-col"
+        className=" bg-[rgb(24,24,24)] text-white w-full justify-around flex flex-col py-20"
       >
-        <div className=" relative justify-center  mx-auto flex py-10 px-2 rounded-[20px]">
+        <div className=" relative justify-center mx-auto flex px-4 rounded-[20px] md:mb-12">
           <img
             src={placeholder}
             alt=""
@@ -33,6 +33,9 @@ function About() {
               fram emot att samarbeta med dig för att stödja och utveckla ditt
               affärsområde.
             </p>
+            <button className="bg-green-300 text-black w-[80px] p-2 m-4 rounded-lg mx-auto md:mx-0 md:mt-6 text-sm">
+              Läs mer
+            </button>
           </div>
         </div>
         <div className=" bg-[rgb(30,30,30)] w-[95%] lg:w-[80%] mx-auto flex justify-center items-center mb-10 py-10 px-1 rounded-[20px]">

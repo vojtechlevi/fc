@@ -3,10 +3,7 @@ import { FaInstagram, FaFacebook } from "react-icons/fa";
 
 function Footer() {
   return (
-    <div
-      id="Contact"
-      className=" bg-[#080808] h-screen w-full px-10 flex flex-col justify-center"
-    >
+    <div id="Contact" className=" w-full p-10 flex flex-col justify-center">
       <div className=" flex flex-col ">
         <div className="flex flex-col gap-10 md:flex-row md:items-center md:mx-auto md:gap-48">
           <div className="text-white text-xs text-center h-32 gap-5 flex flex-col md:justify-between">
