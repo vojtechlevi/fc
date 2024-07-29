@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: rgb(24, 24, 24);
+  background-color: #2d2d2d;
 }
 
 @supports (-webkit-touch-callout: none) {

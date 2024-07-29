@@ -3,23 +3,14 @@ import { IoPricetagOutline } from "react-icons/io5";
 import { LuBarChartBig } from "react-icons/lu";
 import { RiCustomerService2Fill } from "react-icons/ri";
 
-import Test from "./Test";
-import placeholder from "../assets/Unknown.png";
-
 function About() {
   return (
     <>
       <div
         id="About"
-        className=" bg-[rgb(24,24,24)] text-white w-full justify-around flex flex-col py-20"
+        className=" text-white w-full justify-around flex flex-col py-20"
       >
         <div className=" relative justify-center mx-auto flex px-4 rounded-[20px] md:mb-12">
-          <img
-            src={placeholder}
-            alt=""
-            srcset=""
-            className=" w-[300px] hidden rounded-[20px] md:flex md:mx-5"
-          />
           <div className=" flex flex-col">
             <h2 className=" font-bold text-center text-lg md:text-2xl md:text-left">
               Vilka är vi?
@@ -83,7 +74,6 @@ function About() {
                 </p>
               </div>
             </div>
-            <Test />
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import { ReactTyped } from "react-typed";
 function Hero() {
   return (
     <div id="Home" className="text-white">
-      <div className=" w-full h-screen mx-auto text-center flex flex-col justify-center ">
+      <div className=" w-full h-screen mx-auto text-center flex flex-col justify-center bg-gradient-to-b from-transparent from-70% to-[#2d2d2d]">
         <img
           className="w-full h-full object-cover absolute top-0 left-0 -z-10 border-none opacity-80"
           src={image}
@@ -22,7 +22,7 @@ function Hero() {
           <p>Hos oss hittar du allt inom</p>
           <ReactTyped
             className="ml-2 font-bold"
-            strings={["Frukt/Grönt", "Kolonial", "Frysvaror"]}
+            strings={["Frukt / Grönt", "Kolonial", "Frysvaror"]}
             typeSpeed={50}
             backSpeed={30}
             showCursor={false}
