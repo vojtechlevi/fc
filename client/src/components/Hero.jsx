@@ -38,7 +38,6 @@ function Hero() {
           <a href="#Contact">Bli kund idag</a>
         </button>
       </div>
-      <OrderForm />
     </div>
   );
 }
