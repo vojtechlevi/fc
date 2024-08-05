@@ -1,7 +1,15 @@
 import React from "react";
+import OrderForm from "../components/OrderForm";
 
 const Contact = () => {
-  return <div>Contact</div>;
+  return (
+    <>
+      <div className="w-full h-screen mt-24">
+        contact
+        <OrderForm />
+      </div>
+    </>
+  );
 };
 
 export default Contact;

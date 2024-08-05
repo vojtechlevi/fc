@@ -2,8 +2,6 @@ import React from "react";
 import image from "../assets/pexels-mark-stebnicki-2749165.jpg";
 import { ReactTyped } from "react-typed";
 
-import OrderForm from "./OrderForm";
-
 function Hero() {
   return (
     <div id="Home" className="text-white">
