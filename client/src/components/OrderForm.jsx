@@ -8,7 +8,7 @@ function OrderForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("35.157.117.28/send-order", {
+    const response = await fetch("https://fc-dlr5.onrender.com/send-order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
