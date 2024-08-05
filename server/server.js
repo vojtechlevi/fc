@@ -25,6 +25,9 @@ app.post("/send-order", async (req, res) => {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
+      tls: {
+        ciphers: "SSLv3",
+      },
       debug: true, // enable debug mode for detailed logging
       logger: true, // log information
     });
