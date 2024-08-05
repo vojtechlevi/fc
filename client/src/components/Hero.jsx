@@ -2,6 +2,8 @@ import React from "react";
 import image from "../assets/pexels-mark-stebnicki-2749165.jpg";
 import { ReactTyped } from "react-typed";
 
+import OrderForm from "./OrderForm";
+
 function Hero() {
   return (
     <div id="Home" className="text-white">
@@ -10,7 +12,6 @@ function Hero() {
           className="w-full h-full object-cover absolute top-0 left-0 -z-10 border-none opacity-80"
           src={image}
           alt="farm"
-          srcset=""
         />
         <h1 className="text-green-300 text-xs md:text-lg">
           DIN GROSSIST NÄR KÖKET FÅR BESTÄMMA
@@ -37,6 +38,7 @@ function Hero() {
           <a href="#Contact">Bli kund idag</a>
         </button>
       </div>
+      <OrderForm />
     </div>
   );
 }

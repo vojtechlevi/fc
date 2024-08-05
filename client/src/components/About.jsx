@@ -29,14 +29,14 @@ function About() {
             </button>
           </div>
         </div>
-        <div className=" bg-[rgb(30,30,30)] w-[95%] lg:w-[80%] mx-auto flex justify-center items-center mb-10 py-10 px-1 rounded-[20px]">
+        <div className=" bg-gradient-to-b from-transparent from-80% to-[rgb(30,30,30)] w-[95%] lg:w-[80%] mx-auto flex justify-center items-center mb-10 py-10 px-1 rounded-[20px]">
           <div className="w-full text-center">
             <h2 className=" font-bold text-md md:text-2xl">
               Varför ska ni välja oss?
             </h2>
             <div className="flex mt-5 w-full justify-around">
               <div>
-                <div class=" flex items-center justify-center text-center">
+                <div className=" flex items-center justify-center text-center">
                   <IoPricetagOutline className=" text-sm text-green-400 md:text-lg" />
                   <p className=" font-bold text-xs ml-2 md:text-lg">Prisvärt</p>
                 </div>
@@ -48,7 +48,7 @@ function About() {
                 </p>
               </div>
               <div className="">
-                <div class=" flex items-center justify-center text-center">
+                <div className=" flex items-center justify-center text-center">
                   <LuBarChartBig className=" text-sm text-red-400 md:text-lg" />
                   <p className=" font-bold text-xs ml-1 md:text-lg">
                     Flexibelt
@@ -62,7 +62,7 @@ function About() {
                 </p>
               </div>
               <div className="">
-                <div class=" flex items-center justify-center text-center">
+                <div className=" flex items-center justify-center text-center">
                   <RiCustomerService2Fill className=" text-sm text-orange-400 md:text-lg" />
                   <p className=" font-bold text-xs ml-1 md:text-lg">Service</p>
                 </div>

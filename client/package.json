@@ -10,6 +10,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
     "react-intersection-observer": "^9.8.1",
+    "react-router-dom": "^6.25.1",
     "react-scripts": "5.0.1",
     "react-typed": "^2.0.12",
     "swiper": "^11.0.7",
@@ -41,6 +42,5 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.1"
-    
   }
 }
