@@ -8,7 +8,7 @@ function OrderForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/send-order", {
+    const response = await fetch("35.157.117.28/send-order", {
       // Uppdatera URL här
       method: "POST",
       headers: {
