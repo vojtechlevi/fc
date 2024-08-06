@@ -39,7 +39,7 @@ app.post("/send-order", async (req, res) => {
   }
 
   const mailOptions = {
-    from: "order@fruktcentralen.se",
+    from: email,
     to: "order@fruktcentralen.se", // change to your actual email address
     subject: `Ny beställning från ${name}`,
     text: `Namn: ${name}\nBeställning:\n${order}`,
