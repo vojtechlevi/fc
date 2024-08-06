@@ -20,16 +20,14 @@ app.post("/send-order", async (req, res) => {
     transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
-      secure: false, // use TLS (STARTTLS)
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
+      secure: false, // use TLS
+      requireTLS: true, // Use STARTTLS
       tls: {
-        ciphers: "SSLv3",
+        ciphers: "SSLv3", // Ensure compatibility with different servers
+        rejectUnauthorized: false,
       },
-      debug: true, // enable debug mode for detailed logging
-      logger: true, // log information
+      logger: true,
+      debug: true,
     });
   } catch (error) {
     console.error("Error creating transport:", error);
@@ -39,7 +37,7 @@ app.post("/send-order", async (req, res) => {
   }
 
   const mailOptions = {
-    from: "order@fruktcentralen.se",
+    from: email,
     to: "order@fruktcentralen.se", // change to your actual email address
     subject: `Ny beställning från ${name}`,
     text: `Namn: ${name}\nBeställning:\n${order}`,
