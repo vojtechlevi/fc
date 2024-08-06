@@ -8,13 +8,19 @@ function OrderForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("35.157.117.28/send-order", {
+    const response = await fetch("http://localhost:5000/send-order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name, email, order }),
     });
+
+    if (!response.ok) {
+      // Om svaret inte är ok, kasta ett fel
+      setMessage("Det uppstod ett problem vid skickandet av beställningen.");
+      return;
+    }
 
     const result = await response.json();
     setMessage(result.message);

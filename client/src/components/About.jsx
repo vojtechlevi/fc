@@ -10,7 +10,7 @@ function About() {
         id="About"
         className=" text-white w-full justify-around flex flex-col py-20"
       >
-        {/* <div className=" relative justify-center mx-auto flex px-4 rounded-[20px] md:mb-12">
+        <div className=" relative justify-center mx-auto flex px-4 rounded-[20px] ">
           <div className=" flex flex-col">
             <h2 className=" font-bold text-center text-lg md:text-2xl md:text-left">
               Vilka är vi?
@@ -28,14 +28,14 @@ function About() {
               Läs mer
             </button>
           </div>
-        </div> */}
-        <div className=" md:bg-gradient-to-b md:from-transparent md:from-80% md:to-[rgb(30,30,30)] w-[95%] lg:w-[80%] mx-auto flex justify-center items-center mb-10 py-10 px-1 rounded-[20px]">
-          <div className="w-full text-center flex flex-col ">
+        </div>
+        <div className="  w-[95%] lg:w-[80%] mx-auto flex justify-center items-center mb-10 py-10 px-1 rounded-[20px]">
+          <div className="w-full text-center flex flex-col h-full ">
             <h2 className=" font-bold text-md md:text-2xl">
               Varför ska ni välja oss?
             </h2>
-            <div className="flex flex-col gap-4 items-center md:items-start md:flex-row  mt-5 w-full justify-around ">
-              <div>
+            <div className="flex flex-col gap-4 items-center md:items-start md:flex-row  mt-5 w-full justify-around h-full">
+              <div className="bg-gradient-to-b from-transparent from-80% to-[rgb(20,20,20)] p-10 rounded-[20px]">
                 <div className=" flex items-center justify-center text-center">
                   <IoPricetagOutline className=" text-sm text-green-400 md:text-lg" />
                   <p className=" font-bold text-xs ml-2 md:text-lg">Prisvärt</p>
@@ -46,7 +46,7 @@ function About() {
                   din restaurang bästa möjliga värde för pengarna.
                 </p>
               </div>
-              <div>
+              <div className="bg-gradient-to-b from-transparent from-80% to-[rgb(20,20,20)] p-10 rounded-[20px]">
                 <div className=" flex items-center justify-center text-center">
                   <LuBarChartBig className=" text-sm text-red-400 md:text-lg" />
                   <p className=" font-bold text-xs ml-1 md:text-lg">
@@ -59,7 +59,7 @@ function About() {
                   skräddarsydda lösningar för att passa just din verksamhet.
                 </p>
               </div>
-              <div>
+              <div className="bg-gradient-to-b from-transparent from-80% to-[rgb(20,20,20)] p-10 rounded-[20px] h-fit">
                 <div className=" flex items-center justify-center text-center">
                   <RiCustomerService2Fill className=" text-sm text-orange-400 md:text-lg" />
                   <p className=" font-bold text-xs ml-1 md:text-lg">Service</p>
