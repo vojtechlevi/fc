@@ -10,6 +10,21 @@ const port = 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
+const net = require("net");
+const smtpHost = process.env.SMTP_HOST;
+const smtpPort = process.env.SMTP_PORT;
+
+app.get("/test-smtp", (req, res) => {
+  const socket = net.createConnection(smtpPort, smtpHost, () => {
+    res.status(200).send("Connection successful");
+    socket.end();
+  });
+
+  socket.on("error", (err) => {
+    res.status(500).send("Connection failed: " + err.message);
+  });
+});
+
 app.post("/send-order", async (req, res) => {
   const { name, email, order } = req.body;
 
