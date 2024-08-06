@@ -15,34 +15,20 @@ app.post("/send-order", async (req, res) => {
 
   console.log("Received order:", { name, email, order });
 
-  let transporter;
-  try {
-    transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: false, // use TLS (STARTTLS)
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-      tls: {
-        ciphers: "SSLv3",
-      },
-      debug: true, // enable debug mode for detailed logging
-      logger: true, // log information
-    });
-  } catch (error) {
-    console.error("Error creating transport:", error);
-    return res
-      .status(500)
-      .json({ message: "Failed to create email transport." });
-  }
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: false, // use TLS
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
 
   const mailOptions = {
-    from: "order@fruktcentralen.se",
-    to: "order@fruktcentralen.se", // change to your actual email address
+    from: email,
+    to: "order@fruktcentralen.se", // Ändra till din faktiska e-postadress
     subject: `Ny beställning från ${name}`,
-    text: `Namn: ${name}\nBeställning:\n${order}`,
+    text: `Namn: ${name}\nE-post: ${email}\nBeställning:\n${order}`,
   };
 
   try {
@@ -52,7 +38,7 @@ app.post("/send-order", async (req, res) => {
   } catch (error) {
     console.error("Error sending email:", error);
     res.status(500).json({
-      message: `Det uppstod ett problem vid skickandet av beställningen: ${error.message}`,
+      message: "Det uppstod ett problem vid skickandet av beställningen.",
     });
   }
 });
