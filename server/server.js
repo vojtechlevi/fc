@@ -10,6 +10,8 @@ const port = 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
+/* Connect test */
+
 const net = require("net");
 const smtpHost = process.env.SMTP_HOST;
 const smtpPort = process.env.SMTP_PORT;
@@ -25,6 +27,8 @@ app.get("/test-smtp", (req, res) => {
   });
 });
 
+/* test */
+
 app.post("/send-order", async (req, res) => {
   const { name, email, order } = req.body;
 
@@ -36,6 +40,10 @@ app.post("/send-order", async (req, res) => {
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
       secure: false, // use TLS
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
       requireTLS: true, // Use STARTTLS
       tls: {
         ciphers: "SSLv3", // Ensure compatibility with different servers
