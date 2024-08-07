@@ -1,41 +1,47 @@
+// server.js or the relevant server file
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const sgMail = require("@sendgrid/mail");
+const sendgridMail = require("@sendgrid/mail");
+
 require("dotenv").config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// Set SendGrid API key
+const apiKey = process.env.SENDGRID_API_KEY;
+sendgridMail.setApiKey(apiKey);
 
 app.post("/send-order", async (req, res) => {
   const { name, email, order } = req.body;
 
-  console.log("Received order:", { name, email, order });
-
+  // Email content
   const msg = {
-    to: "leviekstrom@fruktcentralen.se", // Ändra till din faktiska e-postadress
-    from: "leviekstrom@fruktcentralen.se", // Ange den godkända avsändaradressen på SendGrid
-    subject: `Ny beställning från ${name}`,
-    text: `Namn: ${name}\nE-post: ${email}\nBeställning:\n${order}`,
+    to: "leviekstrom@fruktcentralen.se", // Recipient's email address
+    from: "leviekstrom@fruktcentralen.se", // Verified sender's email address
+    subject: `New Order from ${name}`,
+    text: `Name: ${name}\nEmail: ${email}\nOrder:\n${order}`,
   };
 
   try {
-    await sgMail.send(msg);
-    console.log("Email sent successfully.");
-    res.status(200).json({ message: "Beställningen har skickats!" });
+    // Send email
+    await sendgridMail.send(msg);
+    res.status(200).json({ message: "Order has been sent!" });
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error(
+      "Error sending email:",
+      error.response ? error.response.body : error
+    );
     res.status(500).json({
-      message: "Det uppstod ett problem vid skickandet av beställningen.",
+      message: `There was a problem sending the order: ${error.message}`,
     });
   }
 });
 
 app.listen(port, () => {
-  console.log(`Servern kör på http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
