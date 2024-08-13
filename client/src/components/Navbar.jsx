@@ -18,8 +18,8 @@ function Navbar() {
         <div
           className={
             !showMenu
-              ? " bg-black/20 fixed top-0 left-0 flex justify-between items-center h-24 w-full mx-auto px-6 lg:px-20"
-              : " fixed top-0 left-0 duration-[400ms]  flex justify-between items-center h-24 w-full mx-auto px-6 lg:px-20 md:bg-transparent"
+              ? " bg-black/20 fixed top-0 left-0 flex z-20 justify-between items-center h-24 w-full mx-auto px-6 lg:px-20"
+              : " fixed top-0 z-20 left-0 duration-[400ms]  flex justify-between items-center h-24 w-full mx-auto px-6 lg:px-20 md:bg-transparent"
           }
         >
           <div className="flex items-center ">
@@ -32,12 +32,6 @@ function Navbar() {
               className="relative cursor-pointer transition-all ease-in-out before:transition-[width] before:ease-in-out before:duration-200 before:absolute before:bg-white before:origin-center before:h-[1px] before:w-0 hover:before:w-[50%] before:bottom-0 before:left-[50%] after:transition-[width] after:ease-in-out after:duration-200 after:absolute after:bg-white after:origin-center after:h-[1px] after:w-0 hover:after:w-[50%] after:bottom-0 after:right-[50%]"
             >
               Hem
-            </Link>
-            <Link
-              to="/about"
-              className="relative cursor-pointer transition-all ease-in-out before:transition-[width] before:ease-in-out before:duration-200 before:absolute before:bg-white before:origin-center before:h-[1px] before:w-0 hover:before:w-[50%] before:bottom-0 before:left-[50%] after:transition-[width] after:ease-in-out after:duration-200 after:absolute after:bg-white after:origin-center after:h-[1px] after:w-0 hover:after:w-[50%] after:bottom-0 after:right-[50%]"
-            >
-              Om oss
             </Link>
             <Link
               to="/contact"
@@ -53,7 +47,7 @@ function Navbar() {
             </Link>
             <Link
               to="/login"
-              className="relative cursor-pointer transition-all ease-in-out before:transition-[width] before:ease-in-out before:duration-200 before:absolute before:bg-white before:origin-center before:h-[1px] before:w-0 hover:before:w-[50%] before:bottom-0 before:left-[50%] after:transition-[width] after:ease-in-out after:duration-200 after:absolute after:bg-white after:origin-center after:h-[1px] after:w-0 hover:after:w-[50%] after:bottom-0 after:right-[50%]"
+              className="ml-4 bg-green-300 text-black  p-2 rounded-lg"
             >
               Logga in
             </Link>
@@ -68,6 +62,7 @@ function Navbar() {
           </div>
         </div>
       </div>
+
       <div
         className={
           showMenu
@@ -78,9 +73,6 @@ function Navbar() {
         <div className="flex flex-col gap-8 items-center text-xl">
           <Link to="/" onClick={handleMenu}>
             Hem
-          </Link>
-          <Link to="/about" onClick={handleMenu}>
-            Om oss
           </Link>
           <Link to="/contact" onClick={handleMenu}>
             Kontakt

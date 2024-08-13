@@ -13,7 +13,7 @@ const Footer = () => {
         className="flex justify-between p-12 bg-auto border-t-2"
         style={{ backgroundImage: `url(${footerPattern})` }}
       >
-        <div className="w-[700px] flex flex-col text-white">
+        <div className="w-[700px] flex flex-col ">
           <div className="flex flex-col md:flex-row  mb-4 gap-12 font-thin">
             <div className="gap-2 flex flex-col">
               <p className="font-bold">Öppettider</p>

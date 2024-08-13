@@ -6,7 +6,7 @@ const Contact = () => {
     <>
       <div className="w-full h-screen mt-24">
         Kontakt
-        <OrderForm />
+        {/* <OrderForm /> */}
       </div>
     </>
   );

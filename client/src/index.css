@@ -2,12 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+/* * {
   @apply scroll-smooth;
-}
+} */
 
 body {
   background-color: #1e1e1e;
+  color: #d7d7d7;
 }
 
 @supports (-webkit-touch-callout: none) {
