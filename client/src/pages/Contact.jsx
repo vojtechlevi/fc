@@ -1,9 +1,9 @@
 import React from "react";
-import OrderForm from "../components/OrderForm";
-
+import Navbar from "../components/Navbar";
 const Contact = () => {
   return (
     <>
+      <Navbar />
       <div className="w-full h-screen mt-24">
         Kontakt
         {/* <OrderForm /> */}

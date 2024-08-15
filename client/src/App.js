@@ -1,8 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -12,41 +11,43 @@ import Contact from "./pages/Contact";
 import Assortment from "./pages/Assortment";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import CompleteRegistration from "./pages/CompleteRegistration";
 
-import ProtectedRoute from "./utils/protectedRoute";
 import supabase from "./utils/supabaseClient";
+import ProtectedRoute from "./utils/protectedRoute";
 import UserContext from "./utils/userContext";
 
 function App() {
   const [user, setUser] = useState(null);
   const userContextValue = { user, setUser };
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const getUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      setUser(user);
-    };
+    const checkUserProfile = async () => {
+      if (user) {
+        // Kolla om användarens profil är komplett
+        const { data: profile, error } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", user.id)
+          .single();
 
-    getUser();
-
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        const user = session?.user ?? null;
-        setUser(user);
+        if (error) {
+          console.error("Error fetching profile:", error.message);
+        } else if (!profile || !profile.username) {
+          // Omdirigera till complete-registration om profilen inte är komplett
+          navigate("/complete-registration");
+        }
       }
-    );
-
-    // Cleanup the listener
-    return () => {
-      authListener.subscription.unsubscribe();
     };
-  }, []);
+
+    checkUserProfile();
+  }, [user, navigate]);
+
   return (
     <>
       <UserContext.Provider value={userContextValue}>
-        <Navbar />
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -59,6 +60,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/complete-registration"
+            element={
+              <ProtectedRoute>
+                <CompleteRegistration />
               </ProtectedRoute>
             }
           />
