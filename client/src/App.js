@@ -25,21 +25,22 @@ function App() {
     const session = supabase.auth.session;
     setUser(session?.user);
 
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        switch (event) {
-          case "SIGNED_IN":
-            setUser(session?.user);
-            break;
-          case "SIGNED_OUT":
-            setUser(null);
-            break;
-          default:
-        }
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      switch (event) {
+        case "SIGNED_IN":
+          setUser(session?.user);
+          break;
+        case "SIGNED_OUT":
+          setUser(null);
+          break;
+        default:
+        // intentionally left blank
       }
-    );
+    });
     return () => {
-      authListener.unsubscribe();
+      subscription.unsubscribe();
     };
   }, []);
 
