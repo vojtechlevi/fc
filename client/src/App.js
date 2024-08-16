@@ -25,7 +25,6 @@ function App() {
   useEffect(() => {
     const session = supabase.auth.session;
     setUser(session?.user);
-    console.log(session);
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
