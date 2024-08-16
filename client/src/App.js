@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
@@ -11,7 +11,8 @@ import Contact from "./pages/Contact";
 import Assortment from "./pages/Assortment";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import CompleteRegistration from "./pages/CompleteRegistration";
+import CompleteRegistration from "./pages/ContinueRegistration";
+import AuthConfirm from "./pages/AuthConfirm";
 
 import supabase from "./utils/supabaseClient";
 import ProtectedRoute from "./utils/protectedRoute";
@@ -21,29 +22,28 @@ function App() {
   const [user, setUser] = useState(null);
   const userContextValue = { user, setUser };
 
-  const navigate = useNavigate();
-
   useEffect(() => {
-    const checkUserProfile = async () => {
-      if (user) {
-        // Kolla om användarens profil är komplett
-        const { data: profile, error } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", user.id)
-          .single();
+    const session = supabase.auth.session;
+    setUser(session?.user);
+    console.log(session);
 
-        if (error) {
-          console.error("Error fetching profile:", error.message);
-        } else if (!profile || !profile.username) {
-          // Omdirigera till complete-registration om profilen inte är komplett
-          navigate("/complete-registration");
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        switch (event) {
+          case "SIGNED_IN":
+            setUser(session?.user);
+            break;
+          case "SIGNED_OUT":
+            setUser(null);
+            break;
+          default:
         }
       }
+    );
+    return () => {
+      authListener.unsubscribe;
     };
-
-    checkUserProfile();
-  }, [user, navigate]);
+  }, []);
 
   return (
     <>
@@ -56,18 +56,15 @@ function App() {
           <Route path="/assortment" element={<Assortment />} />
           <Route path="/login" element={<Login />} />
           <Route
+            path="/continue-registration"
+            element={<CompleteRegistration />}
+          />
+          <Route path="/auth/confirm" element={<AuthConfirm />} />
+          <Route
             path="/dashboard"
             element={
               <ProtectedRoute>
                 <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/complete-registration"
-            element={
-              <ProtectedRoute>
-                <CompleteRegistration />
               </ProtectedRoute>
             }
           />

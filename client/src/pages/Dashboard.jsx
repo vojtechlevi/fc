@@ -1,15 +1,33 @@
 import React, { useState, useContext, useEffect } from "react";
 
+import supabase from "../utils/supabaseClient";
 import UserContext from "../utils/userContext";
 import Logout from "../components/Logout";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("shop");
+  const [profile, setProfile] = useState(null);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    console.log(user);
-  }, [activeTab]);
+    const fetchProfile = async () => {
+      // Fetch the user's profile
+      console.log();
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.user.id)
+        .single(); // Use .single() to get a single object instead of an array
+
+      if (profileError) {
+        console.log("Failed to fetch profile information.");
+      } else {
+        setProfile(profile);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -29,7 +47,7 @@ const Dashboard = () => {
       {/* Sidebar */}
       <div className="w-full sm:w-1/4 text-white flex flex-col justify-between">
         <div className="p-4">
-          <h2 className="text-2xl font-bold">Hej!</h2>
+          <h2 className="text-2xl font-bold">Hej {profile?.display_name}!</h2>
           <p>Kund</p>
 
           <ul className="mt-8 space-y-2">

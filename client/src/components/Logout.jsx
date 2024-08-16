@@ -1,21 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import supabase from "../utils/supabaseClient";
-import UserContext from "../utils/userContext";
 
 const Logout = () => {
-  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      console.log(user);
       const { error } = await supabase.auth.signOut();
-      console.log("After signOut");
 
       if (!error) {
-        console.log("no error");
-        setUser(null);
         navigate("/");
       } else {
         console.error("Logout failed: ", error.message);
