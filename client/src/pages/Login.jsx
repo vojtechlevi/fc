@@ -1,10 +1,9 @@
-import React from "react";
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
 import Navbar from "../components/Navbar";
 import supabase from "../utils/supabaseClient";
 import UserContext from "../utils/userContext";
+import PasswordReset from "../components/PasswordReset"; // Importera lösenordsåterställningskomponenten
 
 const Login = () => {
   let navigate = useNavigate();
@@ -14,6 +13,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [showPasswordReset, setShowPasswordReset] = useState(false); // State för att visa lösenordsåterställningskomponenten
 
   function handleChange(event) {
     setErrorMessage("");
@@ -25,11 +25,10 @@ const Login = () => {
     });
   }
 
-  async function signInWithPassword(e) {
+  const signInWithPassword = async (e) => {
     e.preventDefault();
 
-    // Form validation
-    if (!formData.email && !formData.password) {
+    if (!formData.email || !formData.password) {
       setErrorMessage("Mailadress och lösenord krävs.");
       return;
     }
@@ -41,35 +40,29 @@ const Login = () => {
       });
 
       if (error) {
-        setErrorMessage(translateErrorMessage(error.message));
+        setErrorMessage(error.message);
         return;
       }
 
       if (data) {
-        setUser(data);
+        setUser(data.user);
+        localStorage.setItem("user", JSON.stringify(data.user));
         navigate("/dashboard");
       }
     } catch (error) {
-      alert(error);
+      setErrorMessage("Inloggning misslyckades. Vänligen försök igen.");
     }
-  }
-
-  function translateErrorMessage(message) {
-    const errorTranslations = {
-      "Email and password are required.": "E-post och lösenord krävs.",
-      "Invalid login credentials": "Ogiltiga inloggningsuppgifter",
-    };
-
-    return errorTranslations[message] || message;
-  }
+  };
 
   return (
-    <>
+    <div className="min-h-screen flex items-center justify-center">
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-          <h2 className="text-2xl font-bold text-center mb-6">Logga In</h2>
-          <form onSubmit={signInWithPassword}>
+      <div className="w-full max-w-md">
+        {!showPasswordReset ? (
+          <form
+            onSubmit={signInWithPassword}
+            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          >
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -78,13 +71,13 @@ const Login = () => {
                 Email
               </label>
               <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="email"
-                name="email"
                 type="email"
+                name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
+                placeholder="Email"
               />
             </div>
             <div className="mb-6">
@@ -92,45 +85,42 @@ const Login = () => {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="password"
               >
-                Lösenord
+                Password
               </label>
               <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
-                name="password"
                 type="password"
+                name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
+                placeholder="Password"
               />
             </div>
-            {errorMessage ? (
-              <div className="w-full border-t-2 border-yrgo-blue bg-[#f2f2f2] lg:border-none ">
-                <p className="py-4 text-center text-yrgo-blue">
-                  {errorMessage}
-                </p>
-              </div>
-            ) : (
-              ""
-            )}
             <div className="flex items-center justify-between">
               <button
-                type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
               >
-                Logga In
+                Login
               </button>
-              {/* <a
+              {errorMessage && (
+                <p className="text-red-500 text-xs italic">{errorMessage}</p>
+              )}
+              <a
                 className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
                 href="#"
+                onClick={() => setShowPasswordReset(true)}
               >
                 Glömt ditt lösenord?
-              </a> */}
+              </a>
             </div>
           </form>
-        </div>
+        ) : (
+          <PasswordReset />
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

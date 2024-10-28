@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -11,29 +12,40 @@ import Assortment from "./pages/Assortment";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import CompleteRegistration from "./pages/ContinueRegistration";
-import AuthConfirm from "./pages/AuthConfirm";
 
 import supabase from "./utils/supabaseClient";
 import ProtectedRoute from "./utils/protectedRoute";
 import UserContext from "./utils/userContext";
+import { CartProvider } from "./utils/cartContext";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  let navigate = useNavigate();
   const [user, setUser] = useState(null);
   const userContextValue = { user, setUser };
 
   useEffect(() => {
-    const session = supabase.auth.session;
-    setUser(session?.user);
+    // Retrieve user session from local storage
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      navigate("/dashboard");
+    }
+    setLoading(false);
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       switch (event) {
         case "SIGNED_IN":
+          navigate("/dashboard");
+          console.log(user);
           setUser(session?.user);
+          localStorage.setItem("user", JSON.stringify(session?.user));
           break;
         case "SIGNED_OUT":
           setUser(null);
+          localStorage.removeItem("user");
           break;
         default:
         // intentionally left blank
@@ -58,12 +70,13 @@ function App() {
             path="/continue-registration"
             element={<CompleteRegistration />}
           />
-          <Route path="/auth/confirm" element={<AuthConfirm />} />
           <Route
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <CartProvider>
+                  <Dashboard />
+                </CartProvider>
               </ProtectedRoute>
             }
           />

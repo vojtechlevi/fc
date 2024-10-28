@@ -4,7 +4,7 @@ import { ReactTyped } from "react-typed";
 
 function Hero() {
   return (
-    <div id="Home" className="text-white">
+    <div id="Home" className="text-white ">
       <div className=" w-full h-screen mx-auto text-center flex flex-col justify-center bg-gradient-to-b from-transparent from-70% to-[#1e1e1e]">
         <img
           className="w-full h-full object-cover absolute top-0 left-0 -z-10 border-none opacity-80"
