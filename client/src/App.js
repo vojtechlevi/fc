@@ -19,10 +19,11 @@ import UserContext from "./utils/userContext";
 import { CartProvider } from "./utils/cartContext";
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  let navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const userContextValue = { user, setUser };
+  const [profile, setProfile] = useState(null);
+
+  const userContextValue = { user, setUser, profile, setProfile };
+  let navigate = useNavigate();
 
   useEffect(() => {
     // Retrieve user session from local storage
@@ -31,7 +32,6 @@ function App() {
       setUser(JSON.parse(storedUser));
       navigate("/dashboard");
     }
-    setLoading(false);
 
     const {
       data: { subscription },
@@ -39,11 +39,12 @@ function App() {
       switch (event) {
         case "SIGNED_IN":
           navigate("/dashboard");
-          console.log(user);
           setUser(session?.user);
+          console.log(event);
           localStorage.setItem("user", JSON.stringify(session?.user));
           break;
         case "SIGNED_OUT":
+          console.log(event);
           setUser(null);
           localStorage.removeItem("user");
           break;
@@ -54,7 +55,7 @@ function App() {
     return () => {
       subscription.unsubscribe();
     };
-  }, []);
+  }, [navigate]);
 
   return (
     <>

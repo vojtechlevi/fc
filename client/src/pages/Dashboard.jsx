@@ -1,34 +1,37 @@
 import React, { useState, useContext, useEffect } from "react";
 
+import supabase from "../utils/supabaseClient";
 import UserContext from "../utils/userContext";
-import ProductList from "../components/ProductList";
 import { Nav } from "../components/Navbar";
+import Profile from "../components/Profile";
+import ProductList from "../components/ProductList";
 import CartPage from "../components/Cart";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("profile");
-  const [profile, setProfile] = useState(null);
-  const { user } = useContext(UserContext);
+  const { user, profile, setProfile } = useContext(UserContext);
 
-  /* useEffect(() => {
+  useEffect(() => {
     const fetchProfile = async () => {
-      // Fetch the user's profile
-      console.log();
-      const { data: profile, error: profileError } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", user.user.id)
-        .single(); // Use .single() to get a single object instead of an array
+      if (!user?.id) return; // Ensure user ID is available before querying
 
-      if (profileError) {
-        console.log("Failed to fetch profile information.");
+      const { data, error } = await supabase
+        .from("customers")
+        .select("*")
+        .eq("auth_id", user.id) // Assuming "auth_id" links to Supabase's user ID
+        .single();
+
+      if (error) {
+        console.error("Failed to fetch profile information:", error.message);
       } else {
-        setProfile(profile);
+        setProfile(data);
+        console.log(user);
+        console.log(data);
       }
     };
 
     fetchProfile();
-  }, [user?.user.id]); */
+  }, [user, setProfile]); // Correct dependency to check for `user.id`
 
   const renderContent = () => {
     switch (activeTab) {
@@ -41,7 +44,7 @@ const Dashboard = () => {
       case "cart":
         return <CartPage />;
       case "profile":
-        return <div>Profil</div>;
+        return <Profile profile={profile} />;
       default:
         return <div>Välj en flik för att se innehåll</div>;
     }
