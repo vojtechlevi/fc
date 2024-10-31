@@ -1,6 +1,9 @@
+import { useState, useContext } from "react";
 import { useCart } from "../utils/cartContext";
+import UserContext from "../utils/userContext";
 
 export default function CartPage() {
+  const { user, profile } = useContext(UserContext);
   const {
     cartItems,
     total,
@@ -8,6 +11,10 @@ export default function CartPage() {
     updateCartItemQuantity,
     updateCartItemUnit,
   } = useCart();
+  const [message, setMessage] = useState("");
+
+  const name = profile.name;
+  const email = user.email;
 
   const handleQuantityChange = (productId, unit, quantity) => {
     if (quantity < 1) return;
@@ -18,7 +25,26 @@ export default function CartPage() {
     updateCartItemUnit(productId, oldUnit, newUnit);
   };
 
-  console.log(cartItems);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("https://fc-dlr5.onrender.com/send-order", {
+      //https://fc-dlr5.onrender.com
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, cartItems }),
+    });
+
+    if (!response.ok) {
+      // Om svaret inte är ok, kasta ett fel
+      setMessage("Det uppstod ett problem vid skickandet av beställningen.");
+      return;
+    }
+
+    const result = await response.json();
+    setMessage(result.message);
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 text-black p-6">
@@ -26,7 +52,10 @@ export default function CartPage() {
       {cartItems.length === 0 ? (
         <p className="text-center">Din varukorg är tom.</p>
       ) : (
-        <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md"
+        >
           <ul>
             {cartItems.map((item) => (
               <li
@@ -90,11 +119,14 @@ export default function CartPage() {
             <p className="text-base md:text-lg font-bold">
               Totalt: {total.toFixed(2)} kr
             </p>
-            <button className="bg-green-500 text-sm text-white px-4 py-2 rounded hover:bg-green-600">
+            <button
+              type="submit"
+              className="bg-green-500 text-sm text-white px-4 py-2 rounded hover:bg-green-600"
+            >
               Skicka beställning
             </button>
           </div>
-        </div>
+        </form>
       )}
     </div>
   );
