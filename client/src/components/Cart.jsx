@@ -37,7 +37,7 @@ export default function CartPage() {
                   <img
                     src={item.image_url}
                     alt={item.name}
-                    className="w-16 h-16 object-cover mr-4"
+                    className="w-16 h-16 object-contain mr-4"
                   />
                   <div>
                     <h3 className="font-bold text-sm md:text-base mb-2">
