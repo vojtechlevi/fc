@@ -13,6 +13,9 @@ const ProductList = () => {
   const [quantities, setQuantities] = useState({});
   const [errorMessages, setErrorMessages] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -133,83 +136,240 @@ const ProductList = () => {
     }
   };
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredProducts = products.filter(
+    (product) =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+      (selectedCategory === "" || product.category === selectedCategory) &&
+      (selectedSubCategory === "" ||
+        product.subcategory === selectedSubCategory)
   );
+
+  const categories = [...new Set(products.map((product) => product.category))];
+  const subCategories = selectedCategory
+    ? [
+        ...new Set(
+          products
+            .filter((product) => product.category === selectedCategory)
+            .map((product) => product.subcategory)
+        ),
+      ]
+    : [];
 
   if (loading) return <p>Loading...</p>;
 
   return (
     <>
-      <input
-        type="text"
-        placeholder="Sök produkter..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        className="mb-4 p-2 border rounded-lg text-xs outline-none text-black"
-      />
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4 ">
-        {filteredProducts.map((product) => (
-          <div
-            key={product.id}
-            className="bg-white shadow-lg rounded-lg max-w-full"
+      <div className="flex flex-col md:flex-row">
+        <div className="w-full p-2 rounded-lg md:w-1/6 text-black">
+          <input
+            type="text"
+            placeholder="Sök produkter..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="mb-4 w-full p-2 border rounded-md text-[10px] outline-none text-black"
+          />
+          <button
+            className="md:hidden text-white p-2 rounded-lg mb-4 bg-green-400"
+            onClick={() => setIsModalOpen(true)}
           >
-            <img
-              src={product.image_url || "/placeholder.jpg"}
-              alt={product.name}
-              className="h-24 w-full object-contain p-2 rounded-t-lg"
-            />
-            <div className="px-4 pb-4">
-              <h3 className="text-[12px] text-black w-full font-semibold">
-                {product.name}
-              </h3>
-              <p>{product.description}</p>
-              <p className="text-[6px] text-gray-500 mb-2">
-                Kategori: {product.category}
-              </p>
-              <p className="text-green-600 font-bold mb-2">
-                {product.price} kr / {product.unit[0]}
-              </p>
-
-              <div className="mb-2 flex gap-4">
-                <input
-                  type="number"
-                  min="1"
-                  value={quantities[product.id] || 1}
-                  onChange={(e) =>
-                    handleQuantityChange(product.id, e.target.value)
-                  }
-                  className="pl-2 text-[10px] border text-black rounded w-full outline-none"
-                />
-                <select
-                  value={selectedUnits[product.id] || product.unit[0]}
-                  onChange={(e) => handleUnitChange(product.id, e.target.value)}
-                  className="p-2 text-[10px] border text-black rounded outline-none"
-                >
-                  {product.unit.map((unit) => (
-                    <option key={unit} value={unit}>
-                      {unit}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {errorMessages[product.id] && (
-                <p className="text-red-500 text-[6px] mt-2">
-                  {errorMessages[product.id]}
-                </p>
-              )}
-
-              <button
-                onClick={() => handleAddToCart(product)}
-                className="bg-green-500 w-full text-white text-[10px] p-2 mt-2 rounded"
+            Kategorier
+          </button>
+          <div className="hidden md:block">
+            <h3 className="text-base font-bold mb-4">Kategorier</h3>
+            <ul className="text-[12px]">
+              <li
+                className={`cursor-pointer mb-2 ${
+                  selectedCategory === "" ? "font-semibold" : ""
+                }`}
+                onClick={() => {
+                  setSelectedCategory("");
+                  setSelectedSubCategory("");
+                }}
               >
-                Lägg till i varukorgen
-              </button>
-            </div>
+                Alla
+              </li>
+              {categories.map((category) => (
+                <div key={category}>
+                  <li
+                    className={`cursor-pointer mb-2 ${
+                      selectedCategory === category ? "font-semibold" : ""
+                    }`}
+                    onClick={() => {
+                      setSelectedCategory(category);
+                      setSelectedSubCategory("");
+                    }}
+                  >
+                    {category}
+                  </li>
+                  {selectedCategory === category && (
+                    <ul className="text-[10px]">
+                      <li
+                        className={`cursor-pointer mb-2 ${
+                          selectedSubCategory === "" ? "font-semibold" : ""
+                        }`}
+                        onClick={() => setSelectedSubCategory("")}
+                      >
+                        Alla
+                      </li>
+                      {subCategories.map((subcategory) => (
+                        <li
+                          key={subcategory}
+                          className={`cursor-pointer mb-2 ${
+                            selectedSubCategory === subcategory
+                              ? "font-semibold"
+                              : ""
+                          }`}
+                          onClick={() => setSelectedSubCategory(subcategory)}
+                        >
+                          {subcategory}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </ul>
           </div>
-        ))}
+        </div>
+        <div className="w-full pl-0 md:pl-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 ">
+            {filteredProducts.map((product) => (
+              <div
+                key={product.id}
+                className="bg-white shadow-lg rounded-lg max-w-full"
+              >
+                <img
+                  src={product.image_url || "/placeholder.jpg"}
+                  alt={product.name}
+                  className="h-24 w-full object-contain p-2 rounded-t-lg drop-shadow-lg"
+                />
+                <div className="px-4 pb-4">
+                  <h3 className="text-[14px] text-black w-full font-semibold">
+                    {product.name}
+                  </h3>
+                  <p>{product.description}</p>
+                  <p className="text-green-600 font-bold text-[12px] mb-2">
+                    {product.price} kr / {product.unit[0]}
+                  </p>
+
+                  <div className="mb-2 flex w-full gap-2 ">
+                    <input
+                      type="number"
+                      min="1"
+                      value={quantities[product.id] || 1}
+                      onChange={(e) =>
+                        handleQuantityChange(product.id, e.target.value)
+                      }
+                      className="pl-2 w-full text-[10px] border text-black rounded outline-none"
+                    />
+                    <select
+                      value={selectedUnits[product.id] || product.unit[0]}
+                      onChange={(e) =>
+                        handleUnitChange(product.id, e.target.value)
+                      }
+                      className="p-2 text-[10px] border text-black rounded outline-none"
+                    >
+                      {product.unit.map((unit) => (
+                        <option key={unit} value={unit}>
+                          {unit}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {errorMessages[product.id] && (
+                    <p className="text-red-500 text-[6px] mt-2">
+                      {errorMessages[product.id]}
+                    </p>
+                  )}
+
+                  <button
+                    onClick={() => handleAddToCart(product)}
+                    className="bg-green-500 w-full text-white text-[10px] p-2 mt-2 rounded"
+                  >
+                    Lägg till i varukorgen
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-4 w-full max-w-md mx-auto">
+            <h3 className="text-lg font-bold mb-4">Kategorier</h3>
+            <ul className="text-sm">
+              <li
+                className={`cursor-pointer mb-2 ${
+                  selectedCategory === "" ? "font-semibold" : ""
+                }`}
+                onClick={() => {
+                  setSelectedCategory("");
+                  setIsModalOpen(false);
+                }}
+              >
+                Alla
+              </li>
+              {categories.map((category) => (
+                <li
+                  key={category}
+                  className={`cursor-pointer mb-2 ${
+                    selectedCategory === category ? "font-semibold" : ""
+                  }`}
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    setIsModalOpen(false);
+                  }}
+                >
+                  {category}
+                </li>
+              ))}
+            </ul>
+            {selectedCategory && (
+              <>
+                <h4 className="text-sm font-bold mt-4 mb-2">Underkategorier</h4>
+                <ul className="text-sm">
+                  <li
+                    className={`cursor-pointer mb-2 ${
+                      selectedSubCategory === "" ? "font-semibold" : ""
+                    }`}
+                    onClick={() => {
+                      setSelectedSubCategory("");
+                      setIsModalOpen(false);
+                    }}
+                  >
+                    Alla
+                  </li>
+                  {subCategories.map((subcategory) => (
+                    <li
+                      key={subcategory}
+                      className={`cursor-pointer mb-2 ${
+                        selectedSubCategory === subcategory
+                          ? "font-semibold"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        setSelectedSubCategory(subcategory);
+                        setIsModalOpen(false);
+                      }}
+                    >
+                      {subcategory}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+            <button
+              className="mt-4 bg-red-500 text-white p-2 rounded-lg w-full"
+              onClick={() => setIsModalOpen(false)}
+            >
+              Stäng
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };
