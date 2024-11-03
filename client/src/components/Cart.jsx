@@ -6,6 +6,7 @@ export default function CartPage() {
   const { user, profile } = useContext(UserContext);
   const {
     cartItems,
+    setCartItems,
     total,
     removeFromCart,
     updateCartItemQuantity,
@@ -41,7 +42,7 @@ export default function CartPage() {
       setMessage("Det uppstod ett problem vid skickandet av beställningen.");
       return;
     }
-
+    setCartItems([]);
     const result = await response.json();
     setMessage(result.message);
   };

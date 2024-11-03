@@ -3,6 +3,7 @@ import { useEffect, useContext, useState } from "react";
 import supabase from "../utils/supabaseClient";
 import UserContext from "../utils/userContext";
 import { useCart } from "../utils/cartContext";
+import { Apple } from "lucide-react";
 
 const ProductList = () => {
   const { user } = useContext(UserContext);
@@ -75,6 +76,16 @@ const ProductList = () => {
           agreementProducts = data;
         }
 
+        // Fetch pricing overrides from campaign_product
+        const { data: campaignData, error: campaignError } = await supabase
+          .from("campaign")
+          .select("product_id, price");
+
+        if (campaignError) {
+          console.error("Error fetching campaign products:", campaignError);
+          return;
+        }
+
         // Step 5: Create mappings for quick lookup
         const pricelistMap = pricelistProducts.reduce((map, item) => {
           map[item.product_id] = item.price;
@@ -86,13 +97,20 @@ const ProductList = () => {
           return map;
         }, {});
 
+        const campaignMap = campaignData.reduce((map, item) => {
+          map[item.product_id] = item.price;
+          return map;
+        }, {});
+
         // Step 6: Merge the products with pricing overrides
         const productsWithOverriddenPrices = products.map((product) => {
           const overridePrice =
             agreementMap[product.id] ||
             pricelistMap[product.id] ||
+            campaignMap[product.id] ||
             product.price;
-          return { ...product, price: overridePrice };
+          const isCampaign = !!campaignMap[product.id];
+          return { ...product, price: overridePrice, isCampaign };
         });
 
         setProducts(productsWithOverriddenPrices);
@@ -136,15 +154,19 @@ const ProductList = () => {
     }
   };
 
-  const filteredProducts = products.filter(
-    (product) =>
-      product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      (selectedCategory === "" || product.category === selectedCategory) &&
-      (selectedSubCategory === "" ||
-        product.subcategory === selectedSubCategory)
-  );
+  const filteredProducts = products
+    .filter(
+      (product) =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        (selectedCategory === "" || product.category === selectedCategory) &&
+        (selectedSubCategory === "" ||
+          product.subcategory === selectedSubCategory)
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
 
-  const categories = [...new Set(products.map((product) => product.category))];
+  const categories = [
+    ...new Set(products.map((product) => product.category)),
+  ].sort((a, b) => a.localeCompare(b));
   const subCategories = selectedCategory
     ? [
         ...new Set(
@@ -152,7 +174,7 @@ const ProductList = () => {
             .filter((product) => product.category === selectedCategory)
             .map((product) => product.subcategory)
         ),
-      ]
+      ].sort((a, b) => a.localeCompare(b))
     : [];
 
   if (loading) return <p>Loading...</p>;
@@ -203,14 +225,6 @@ const ProductList = () => {
                   </li>
                   {selectedCategory === category && (
                     <ul className="text-[10px]">
-                      <li
-                        className={`cursor-pointer mb-2 ${
-                          selectedSubCategory === "" ? "font-semibold" : ""
-                        }`}
-                        onClick={() => setSelectedSubCategory("")}
-                      >
-                        Alla
-                      </li>
                       {subCategories.map((subcategory) => (
                         <li
                           key={subcategory}
@@ -236,15 +250,24 @@ const ProductList = () => {
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                className="bg-white shadow-lg rounded-lg max-w-full"
+                className="bg-white shadow-lg rounded-lg max-w-full relative"
               >
+                <Apple
+                  className="absolute top-2 right-2 cursor-pointer"
+                  size={12}
+                />
+                {product.isCampaign && (
+                  <span className="absolute z-10 p-1 top-2 left-2 bg-red-500 text-white text-[0.5rem] rounded font-bold">
+                    Kampanj
+                  </span>
+                )}
                 <img
                   src={product.image_url || "/placeholder.jpg"}
                   alt={product.name}
                   className="h-24 w-full object-contain p-2 rounded-t-lg drop-shadow-lg"
                 />
                 <div className="px-4 pb-4">
-                  <h3 className="text-[14px] text-black w-full font-semibold">
+                  <h3 className="text-[10px] text-black w-full font-semibold">
                     {product.name}
                   </h3>
                   <p>{product.description}</p>

@@ -6,6 +6,7 @@ import { Nav } from "../components/Navbar";
 import Profile from "../components/Profile";
 import ProductList from "../components/ProductList";
 import CartPage from "../components/Cart";
+import Campaign from "../components/Campaign";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -38,7 +39,7 @@ const Dashboard = () => {
       case "shop":
         return <ProductList />;
       case "kampanjer":
-        return <div>Kampanjer Content</div>;
+        return <Campaign />;
       case "prislista":
         return <div>Prislista Content</div>;
       case "cart":

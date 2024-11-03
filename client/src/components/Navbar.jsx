@@ -93,7 +93,6 @@ export function Nav({ activeTab, setActiveTab }) {
   const navigate = useNavigate();
   const { cartItems } = useCart();
   const [showMenu, setShowMenu] = useState(false);
-  const [profile, setProfile] = useState(null);
 
   const handleLogout = async () => {
     try {
@@ -120,8 +119,8 @@ export function Nav({ activeTab, setActiveTab }) {
         <div
           className={
             !showMenu
-              ? "bg-white fixed top-0 left-0 flex z-20 justify-between items-center h-24 w-full mx-auto px-6 lg:px-20"
-              : " fixed top-0 z-20 left-0 duration-[400ms]  flex justify-between items-center h-24 w-full mx-auto px-6 lg:px-20 md:bg-transparent"
+              ? "bg-white fixed top-0 left-0 flex z-30 justify-between items-center h-24 w-full mx-auto px-6 lg:px-20"
+              : " fixed top-0 z-30 left-0 duration-[400ms]  flex justify-between items-center h-24 w-full mx-auto px-6 lg:px-20 md:bg-transparent"
           }
         >
           <div className="flex items-center ">
@@ -241,8 +240,8 @@ export function Nav({ activeTab, setActiveTab }) {
         className={` flex justify-center items-center
           ${
             showMenu
-              ? `fixed text-white bg-[#ffffff] z-10 right-0 top-0 w-[100%] opacity-100 h-screen duration-[1s] md:hidden `
-              : " fixed  z-10 top-[-100%] w-[100%] h-screen bg-[#ffffff] opacity-0 duration-[1s]"
+              ? `fixed text-white bg-[#ffffff] z-20 right-0 top-0 w-[100%] opacity-100 h-screen duration-[1s] md:hidden `
+              : " fixed  z-20 top-[-100%] w-[100%] h-screen bg-[#ffffff] opacity-0 duration-[1s]"
           }`}
       >
         <div className="p-4 flex flex-col gap-4">
@@ -252,7 +251,10 @@ export function Nav({ activeTab, setActiveTab }) {
           <ul className="mt-8 space-y-2">
             <li>
               <button
-                onClick={() => (setActiveTab("shop"), handleMenu())}
+                onClick={() => {
+                  setActiveTab("shop");
+                  handleMenu();
+                }}
                 className={`w-full  py-2 px-4 rounded-lg ${
                   activeTab === "shop"
                     ? "bg-green-600 text-white"
@@ -264,7 +266,10 @@ export function Nav({ activeTab, setActiveTab }) {
             </li>
             <li>
               <button
-                onClick={() => (setActiveTab("kampanjer"), handleMenu())}
+                onClick={() => {
+                  setActiveTab("kampanjer");
+                  handleMenu();
+                }}
                 className={`w-full  py-2 px-4 rounded-lg ${
                   activeTab === "kampanjer"
                     ? "bg-green-600 text-white"
@@ -276,7 +281,10 @@ export function Nav({ activeTab, setActiveTab }) {
             </li>
             <li>
               <button
-                onClick={() => (setActiveTab("prislista"), handleMenu())}
+                onClick={() => {
+                  setActiveTab("prislista");
+                  handleMenu();
+                }}
                 className={`w-full  py-2 px-4 rounded-lg ${
                   activeTab === "prislista"
                     ? "bg-green-600 text-white"
@@ -288,7 +296,10 @@ export function Nav({ activeTab, setActiveTab }) {
             </li>
             <li>
               <button
-                onClick={() => (handleMenu(), handleLogout())}
+                onClick={() => {
+                  handleMenu();
+                  handleLogout();
+                }}
                 className={`px-4 w-full py-2 text-xs border bg-green-500 text-nowrap rounded-lg`}
               >
                 Logga ut
