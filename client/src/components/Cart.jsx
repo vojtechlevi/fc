@@ -104,7 +104,13 @@ export default function CartPage() {
                 </div>
                 <div className="text-right">
                   <p className="text-base md:text-lg font-semibold">
-                    {(item.price * item.quantity).toFixed(2)} kr
+                    {(
+                      item.price *
+                      (item.unit === "kolli"
+                        ? item.kolliweight * item.quantity
+                        : item.quantity)
+                    ).toFixed(2)}{" "}
+                    kr
                   </p>
                   <button
                     onClick={() => removeFromCart(item.id)}

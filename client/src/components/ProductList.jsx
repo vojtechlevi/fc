@@ -160,13 +160,27 @@ const ProductList = () => {
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
         (selectedCategory === "" || product.category === selectedCategory) &&
         (selectedSubCategory === "" ||
-          product.subcategory === selectedSubCategory)
+          product.subcategory === selectedSubCategory) &&
+        product.status
     )
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort((a, b) => {
+      const categoryComparison = a.category.localeCompare(b.category, "sv");
+      if (categoryComparison !== 0) {
+        return categoryComparison;
+      }
+      const subCategoryComparison = a.subcategory.localeCompare(
+        b.subcategory,
+        "sv"
+      );
+      if (subCategoryComparison !== 0) {
+        return subCategoryComparison;
+      }
+      return a.name.localeCompare(b.name, "sv");
+    });
 
   const categories = [
     ...new Set(products.map((product) => product.category)),
-  ].sort((a, b) => a.localeCompare(b));
+  ].sort((a, b) => b.length - a.length);
   const subCategories = selectedCategory
     ? [
         ...new Set(
@@ -198,9 +212,9 @@ const ProductList = () => {
           </button>
           <div className="hidden md:block">
             <h3 className="text-base font-bold mb-4">Kategorier</h3>
-            <ul className="text-[12px]">
+            <ul className="text-base">
               <li
-                className={`cursor-pointer mb-2 ${
+                className={`cursor-pointer mb-2 2xl:text-xl ${
                   selectedCategory === "" ? "font-semibold" : ""
                 }`}
                 onClick={() => {
@@ -213,7 +227,7 @@ const ProductList = () => {
               {categories.map((category) => (
                 <div key={category}>
                   <li
-                    className={`cursor-pointer mb-2 ${
+                    className={`cursor-pointer mb-2 hover:underline ${
                       selectedCategory === category ? "font-semibold" : ""
                     }`}
                     onClick={() => {
@@ -224,11 +238,11 @@ const ProductList = () => {
                     {category}
                   </li>
                   {selectedCategory === category && (
-                    <ul className="text-[10px]">
+                    <ul className="text-sm">
                       {subCategories.map((subcategory) => (
                         <li
                           key={subcategory}
-                          className={`cursor-pointer mb-2 ${
+                          className={`cursor-pointer mb-2 hover:underline ${
                             selectedSubCategory === subcategory
                               ? "font-semibold"
                               : ""
@@ -238,6 +252,7 @@ const ProductList = () => {
                           {subcategory}
                         </li>
                       ))}
+                      <div className="w-full h-[1px] bg-gray-400 mb-4"></div>
                     </ul>
                   )}
                 </div>
@@ -266,19 +281,26 @@ const ProductList = () => {
                   alt={product.name}
                   className="h-24 w-full object-contain p-2 rounded-t-lg drop-shadow-lg"
                 />
+                <div className="w-full h-[1px] bg-gray-300 mb-2 relative flex">
+                  <span className="absolute left-1 -top-[5px] text-[6px] text-red-500 bg-white px-1">
+                    test
+                  </span>
+                </div>
                 <div className="px-4 pb-4">
                   <h3 className="text-[10px] text-black w-full font-semibold">
                     {product.name}
                   </h3>
-                  <p>{product.description}</p>
                   <p className="text-green-600 font-bold text-[12px] mb-2">
-                    {product.price} kr / {product.unit[0]}
+                    {product.price} kr / {product.priceunit}
+                  </p>
+                  <p className="text-black text-[7px] h-8">
+                    {product.description}
                   </p>
 
                   <div className="mb-2 flex w-full gap-2 ">
                     <input
                       type="number"
-                      min="1"
+                      min="0"
                       value={quantities[product.id] || 1}
                       onChange={(e) =>
                         handleQuantityChange(product.id, e.target.value)

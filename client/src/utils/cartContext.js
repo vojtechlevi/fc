@@ -38,10 +38,13 @@ export const CartProvider = ({ children }) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
-  const total = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const total = cartItems.reduce((acc, item) => {
+    const itemTotal =
+      item.unit === "kolli"
+        ? item.price * item.kolliweight * item.quantity
+        : item.price * item.quantity;
+    return acc + itemTotal;
+  }, 0);
 
   return (
     <CartContext.Provider
