@@ -55,7 +55,7 @@ const Dashboard = () => {
       <div className="flex flex-col md:flex-row min-h-screen ">
         <Nav activeTab={activeTab} setActiveTab={setActiveTab} />
         {/* Content Area */}
-        <div className="flex-1 px-4 bg-gray-100 pt-32">{renderContent()}</div>
+        <div className="flex-1 px-4 pt-32 bg-[#f0f0f0]">{renderContent()}</div>
       </div>
     </>
   );

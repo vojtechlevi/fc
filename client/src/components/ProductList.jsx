@@ -196,13 +196,13 @@ const ProductList = () => {
   return (
     <>
       <div className="flex flex-col md:flex-row">
-        <div className="w-full p-2 rounded-lg md:w-1/6 text-black">
+        <div className="w-full p-2 rounded-lg md:w-1/6 text-black bg-white">
           <input
             type="text"
-            placeholder="Sök produkter..."
+            placeholder="Sök produkt"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="mb-4 w-full p-2 border rounded-md text-[10px] outline-none text-black"
+            className="mb-4 w-full p-2 border rounded-md text-base outline-none text-black"
           />
           <button
             className="md:hidden text-white p-2 rounded-lg mb-4 bg-green-400"
@@ -260,15 +260,15 @@ const ProductList = () => {
             </ul>
           </div>
         </div>
-        <div className="w-full pl-0 md:pl-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 ">
+        <div className="w-full md:w-5/6 pl-0 md:pl-4 mt-4 md:mt-0">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 ">
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
                 className="bg-white shadow-lg rounded-lg max-w-full relative"
               >
                 <Apple
-                  className="absolute top-2 right-2 cursor-pointer"
+                  className="absolute top-2 right-2 cursor-pointer scale-x-[-1]"
                   size={12}
                 />
                 {product.isCampaign && (
@@ -279,12 +279,12 @@ const ProductList = () => {
                 <img
                   src={product.image_url || "/placeholder.jpg"}
                   alt={product.name}
-                  className="h-24 w-full object-contain p-2 rounded-t-lg drop-shadow-lg"
+                  className="h-36 w-full object-contain p-2 rounded-t-lg drop-shadow-lg"
                 />
                 <div className="w-full h-[1px] bg-gray-300 mb-2 relative flex">
-                  <span className="absolute left-1 -top-[5px] text-[6px] text-red-500 bg-white px-1">
+                  {/* <span className="absolute left-1 -top-[5px] text-[6px] text-red-500 bg-white px-1">
                     test
-                  </span>
+                  </span> */}
                 </div>
                 <div className="px-4 pb-4">
                   <h3 className="text-[10px] text-black w-full font-semibold">

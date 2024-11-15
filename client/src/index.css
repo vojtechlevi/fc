@@ -2,13 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: #000 !important;
+}
+
 /* * {
   @apply scroll-smooth;
 } */
 
 body {
-  background-color: #1e1e1e;
-  color: #d7d7d7;
+  background-color: #ffffff;
+  color: #1e1e1e;
+}
+
+.h-screen-navbar {
+  height: calc(100vh - 6rem);
 }
 
 @supports (-webkit-touch-callout: none) {

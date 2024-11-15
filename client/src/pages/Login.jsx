@@ -55,72 +55,95 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <>
       <Navbar />
-      <div className="w-full max-w-md">
-        {!showPasswordReset ? (
-          <form
-            onSubmit={signInWithPassword}
-            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-          >
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="email"
+      <div className=" h-screen-navbar w-full mt-24">
+        <div className="relative w-full h-full">
+          <div className="relative h-screen-navbar overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1700046193059-990728fd7ce4?q=80&w=2992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="harvest"
+              className="object-contain aspect-square h-full w-full translate-y-[200px] z-10 translate-x-[240px]  md:translate-y-[100px] md:-translate-x-[500px] md:scale-x-[-1] rotate-[20deg] "
+            />
+            <img
+              src="https://images.unsplash.com/photo-1700046193059-990728fd7ce4?q=80&w=2992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="harvest"
+              className="absolute top-0 left-2 object-contain aspect-square h-full w-full rotate-180 md:rotate-0 -translate-x-[180px] -translate-y-[200px]  md:-translate-y-[0px] md:translate-x-[500px]"
+            />
+          </div>
+          <div className="absolute top-0 left-0 w-full lg:z-10 h-full flex flex-col items-center justify-center">
+            {!showPasswordReset ? (
+              <form
+                onSubmit={signInWithPassword}
+                className="h-[500px] bg-white/50 backdrop-blur-[2px] w-2/3 lg:w-1/4 rounded-lg flex flex-col gap-12 px-12 justify-center border"
               >
-                Email
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email"
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email"
+                <div className="">
+                  <input
+                    className=" appearance-none bg-transparent w-full py-2 px-3 text-black placeholder-gray-500 leading-tight focus:outline-none focus:shadow-outline border-b-2 border-gray-500"
+                    id="email"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Mailadress"
+                  />
+                </div>
+                <div className="">
+                  <input
+                    className=" appearance-none bg-transparent w-full py-2 px-3 text-black placeholder-gray-500 leading-tight focus:outline-none focus:shadow-outline border-b-2 border-gray-500"
+                    id="password"
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Lösenord"
+                  />
+                </div>
+                <div className="flex flex-col items-center justify-between">
+                  <button
+                    className="bg-green-500 hover:bg-green-700 w-2/3 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit"
+                  >
+                    Logga in
+                  </button>
+                  {errorMessage && (
+                    <p className="text-red-500 text-xs italic">
+                      {errorMessage}
+                    </p>
+                  )}
+                </div>
+                <div className="flex flex-col text-xs mt-18 text-center">
+                  <p>
+                    Glömt ditt lösenord?
+                    <button
+                      className="pl-1 font-bold text-xs text-green-500 hover:text-green-800"
+                      onClick={() => setShowPasswordReset(true)}
+                    >
+                      Klicka här
+                    </button>
+                  </p>
+
+                  <p>
+                    Inget konto?
+                    <a
+                      className="pl-1 font-bold text-xs text-green-500 hover:text-green-800"
+                      href="/kontakt"
+                    >
+                      Kontakta oss
+                    </a>
+                  </p>
+                </div>
+              </form>
+            ) : (
+              <PasswordReset
+                showPasswordReset={showPasswordReset}
+                setShowPasswordReset={setShowPasswordReset}
               />
-            </div>
-            <div className="mb-6">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="password"
-              >
-                Password
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="password"
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Password"
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit"
-              >
-                Login
-              </button>
-              {errorMessage && (
-                <p className="text-red-500 text-xs italic">{errorMessage}</p>
-              )}
-              <a
-                className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                href="#"
-                onClick={() => setShowPasswordReset(true)}
-              >
-                Glömt ditt lösenord?
-              </a>
-            </div>
-          </form>
-        ) : (
-          <PasswordReset />
-        )}
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

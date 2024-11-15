@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import facebook from "../assets/facebook.png";
 import instagram from "../assets/instagram.png";
-import footerPattern from "../assets/footer-pattern.svg";
 
 const Footer = () => {
   return (
     <>
       <div
-        className="flex justify-between p-12 bg-auto border-t-2"
-        style={{ backgroundImage: `url(${footerPattern})` }}
+        className="snap-end flex justify-between p-12 bg-auto border-t-2 border-black"
+        /* style={{ backgroundImage: `url(${footerPattern})` }} */
       >
         <div className="w-[700px] flex flex-col ">
           <div className="flex flex-col md:flex-row  mb-4 gap-12 font-thin">
@@ -35,7 +34,7 @@ const Footer = () => {
               <p>Cookies</p>
             </div>
           </div>
-          <div className="bg-gray-400 w-[100%] h-[1px] mx-auto"></div>
+          <div className="bg-black w-[100%] h-[1px] mx-auto"></div>
           <div className="flex flex-col md:flex-row gap-6 md:gap-20 w-full mt-4  md:items-start ">
             <div className="flex items-center gap-4">
               <Link to="/">

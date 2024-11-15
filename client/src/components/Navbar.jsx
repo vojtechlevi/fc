@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, X, ShoppingCart, UserRound } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import supabase from "../utils/supabaseClient";
 import { useCart } from "../utils/cartContext";
@@ -8,26 +8,56 @@ import { useCart } from "../utils/cartContext";
 import logo1 from "../assets/FruktCentralen-logo-white-text.svg";
 import logo2 from "../assets/FruktCentralen-logo-black-text.svg";
 
-export default function Navbar() {
+export default function Navbar({ mainRef }) {
   const [showMenu, setShowMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const handleMenu = () => {
     setShowMenu(!showMenu);
     document.body.classList.toggle("overflow-hidden");
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (mainRef && mainRef.current && mainRef.current.scrollTop > 460) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    const mainElement = mainRef ? mainRef.current : null;
+    if (mainElement) {
+      mainElement.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (mainElement) {
+        mainElement.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [mainRef]);
+
   return (
     <>
-      <div className="relative text-white">
+      <div className="relative">
         <div
-          className={
-            !showMenu
-              ? " bg-black/20 fixed top-0 left-0 flex z-20 justify-between items-center h-24 w-full mx-auto px-6 lg:px-20"
-              : " fixed top-0 z-20 left-0 duration-[400ms]  flex justify-between items-center h-24 w-full mx-auto px-6 lg:px-20 md:bg-transparent"
-          }
+          className={`fixed top-0 left-0 flex z-20 justify-between items-center h-20 w-full px-6 lg:px-20 transition-colors duration-300 ${
+            isHomePage && !scrolled
+              ? "bg-transparent text-white"
+              : "bg-white text-black"
+          } ${showMenu ? "md:bg-transparent" : ""}`}
         >
           <div className="flex items-center ">
-            <img src={logo1} alt="Fruktcentralen" className="w-44 md:w-64" />
+            <Link href="/">
+              <img
+                src={isHomePage && !scrolled && !showMenu ? logo1 : logo2}
+                alt="Fruktcentralen"
+                className="w-44 md:w-64"
+              />
+            </Link>
           </div>
 
           <div className="hidden md:flex items-center gap-4">
@@ -38,27 +68,27 @@ export default function Navbar() {
               Hem
             </Link>
             <Link
-              to="/contact"
+              to="/kontakt"
               className="relative cursor-pointer transition-all ease-in-out before:transition-[width] before:ease-in-out before:duration-200 before:absolute before:bg-white before:origin-center before:h-[1px] before:w-0 hover:before:w-[50%] before:bottom-0 before:left-[50%] after:transition-[width] after:ease-in-out after:duration-200 after:absolute after:bg-white after:origin-center after:h-[1px] after:w-0 hover:after:w-[50%] after:bottom-0 after:right-[50%]"
             >
               Kontakt
             </Link>
             <Link
-              to="/assortment"
+              to="/sortiment"
               className="relative cursor-pointer transition-all ease-in-out before:transition-[width] before:ease-in-out before:duration-200 before:absolute before:bg-white before:origin-center before:h-[1px] before:w-0 hover:before:w-[50%] before:bottom-0 before:left-[50%] after:transition-[width] after:ease-in-out after:duration-200 after:absolute after:bg-white after:origin-center after:h-[1px] after:w-0 hover:after:w-[50%] after:bottom-0 after:right-[50%]"
             >
               Sortiment
             </Link>
             <Link
               to="/login"
-              className="ml-4 bg-green-300 text-black  p-2 rounded-lg"
+              className="ml-2 px-4 py-2 text-base text-white bg-green-500 text-nowrap rounded-lg"
             >
               Logga in
             </Link>
           </div>
 
           <div onClick={handleMenu} className="block cursor-pointer md:hidden">
-            {showMenu ? <X size={20} /> : <Menu size={20} />}
+            {showMenu ? <X size={20} color="black" /> : <Menu size={20} />}
           </div>
         </div>
       </div>
@@ -66,18 +96,18 @@ export default function Navbar() {
       <div
         className={
           showMenu
-            ? `fixed text-white items-center justify-center flex bg-[#0a0a0a] z-10 right-0 top-0 w-[100%] opacity-100 h-screen duration-[1s] md:hidden `
-            : " fixed  z-10 top-[-100%] w-[100%] h-screen bg-[#0a0a0a] opacity-0 duration-[1s]"
+            ? `fixed text-black items-center justify-center bg-white flex z-10 right-0 top-0 w-[100%] opacity-100 h-screen duration-[1s] md:hidden `
+            : " fixed  z-10 top-[-100%] w-[100%] h-screen opacity-0 duration-[1s]"
         }
       >
         <div className="flex flex-col gap-8 items-center text-xl">
           <Link to="/" onClick={handleMenu}>
             Hem
           </Link>
-          <Link to="/contact" onClick={handleMenu}>
+          <Link to="/kontakt" onClick={handleMenu}>
             Kontakt
           </Link>
-          <Link to="/assortment" onClick={handleMenu}>
+          <Link to="/sortiment" onClick={handleMenu}>
             Sortiment
           </Link>
           <Link to="/login" onClick={handleMenu}>

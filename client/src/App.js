@@ -11,12 +11,12 @@ import Contact from "./pages/Contact";
 import Assortment from "./pages/Assortment";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import CompleteRegistration from "./pages/ContinueRegistration";
 
 import supabase from "./utils/supabaseClient";
 import ProtectedRoute from "./utils/protectedRoute";
 import UserContext from "./utils/userContext";
 import { CartProvider } from "./utils/cartContext";
+import PageNotFound from "./components/PageNotFound";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -63,14 +63,10 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/assortment" element={<Assortment />} />
+          <Route path="/kontakt" element={<Contact />} />
+          <Route path="/omoss" element={<About />} />
+          <Route path="/sortiment" element={<Assortment />} />
           <Route path="/login" element={<Login />} />
-          <Route
-            path="/continue-registration"
-            element={<CompleteRegistration />}
-          />
           <Route
             path="/dashboard"
             element={
@@ -81,6 +77,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </UserContext.Provider>
     </>

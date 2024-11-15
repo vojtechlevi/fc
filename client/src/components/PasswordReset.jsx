@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import supabase from "../utils/supabaseClient";
 
-const PasswordReset = () => {
+const PasswordReset = ({ showPasswordReset, setShowPasswordReset }) => {
   const [email, setEmail] = useState("");
   const [resetMessage, setResetMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -26,34 +26,41 @@ const PasswordReset = () => {
   }
 
   return (
-    <div>
+    <div className="absolute top-0 left-0 w-full z-10 h-full flex flex-col items-center justify-center">
       <form
         onSubmit={handlePasswordReset}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="h-[500px] bg-white/50 backdrop-blur-[2px] w-2/3 lg:w-1/4 rounded-lg flex flex-col gap-8 px-12 justify-center border"
       >
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="email"
-        >
-          Återställ lösenord
-        </label>
         <input
           type="email"
           name="email"
           value={email}
           placeholder="Ange din e-postadress"
           onChange={(e) => setEmail(e.target.value)}
-          className="shadow appearance-none border rounded w-full mb-4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className=" appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-b-2"
         />
+        <div className="h-[50px]">
+          {resetMessage && (
+            <p className="text-center text-red-500">{resetMessage}</p>
+          )}
+          {errorMessage && (
+            <p className="text-center text-red-500">{errorMessage}</p>
+          )}
+        </div>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-green-500 hover:bg-green-700 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Skicka återställningslänk
         </button>
+        <button
+          onClick={() => setShowPasswordReset(!showPasswordReset)}
+          type="submit"
+          className="bg-green-500 hover:bg-green-700 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Logga in
+        </button>
       </form>
-      {resetMessage && <p>{resetMessage}</p>}
-      {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
 };
