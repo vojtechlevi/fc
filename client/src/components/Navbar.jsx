@@ -11,6 +11,7 @@ import logo2 from "../assets/FruktCentralen-logo-black-text.svg";
 export default function Navbar({ mainRef }) {
   const [showMenu, setShowMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isFoodCategoriesVisible, setIsFoodCategoriesVisible] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === "/";
 
@@ -40,21 +41,53 @@ export default function Navbar({ mainRef }) {
     };
   }, [mainRef]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target.id === "food-categories") {
+            setIsFoodCategoriesVisible(entry.isIntersecting);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const foodCategoriesSection = document.getElementById("food-categories");
+    if (foodCategoriesSection) {
+      observer.observe(foodCategoriesSection);
+    }
+
+    return () => {
+      if (foodCategoriesSection) {
+        observer.unobserve(foodCategoriesSection);
+      }
+    };
+  }, []);
+
   return (
     <>
       <div className="relative">
         <div
           className={`fixed top-0 left-0 flex z-20 justify-between items-center h-20 w-full px-6 lg:px-20 transition-colors duration-300 ${
             isHomePage && !scrolled
-              ? "bg-transparent text-white"
-              : "bg-white text-black"
+              ? " text-white"
+              : isFoodCategoriesVisible
+                ? " text-white"
+                : " text-black"
           } ${showMenu ? "md:bg-transparent" : ""}`}
         >
           <div className="flex items-center ">
             <Link href="/">
               <img
-                src={isHomePage && !scrolled && !showMenu ? logo1 : logo2}
-                alt="Fruktcentralen"
+                src={
+                  isHomePage && !scrolled && !showMenu
+                    ? logo1
+                    : isFoodCategoriesVisible
+                      ? logo1
+                      : logo2
+                }
+                alt="Fruktcentralen logotyp"
                 className="w-44 md:w-64"
               />
             </Link>

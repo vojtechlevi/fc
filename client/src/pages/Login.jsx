@@ -57,9 +57,9 @@ const Login = () => {
   return (
     <>
       <Navbar />
-      <div className=" h-screen-navbar w-full mt-24">
+      <div className=" h-screen w-full ">
         <div className="relative w-full h-full">
-          <div className="relative h-screen-navbar overflow-hidden">
+          <div className="relative h-screen overflow-hidden">
             <img
               src="https://images.unsplash.com/photo-1700046193059-990728fd7ce4?q=80&w=2992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="harvest"

@@ -1,8 +1,8 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "motion/react";
+import React from "react";
 import { IoPricetagOutline } from "react-icons/io5";
 import { LuBarChartBig } from "react-icons/lu";
 import { RiCustomerService2Fill } from "react-icons/ri";
+import FoodCategories from "./FoodCategories";
 
 function About() {
   return (
@@ -80,6 +80,8 @@ function About() {
           />
         </div>
       </section>
+
+      <FoodCategories />
 
       <section
         id="sustainability"
