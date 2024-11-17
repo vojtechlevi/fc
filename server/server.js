@@ -35,12 +35,3 @@ app.use(errorHandler);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-// Graceful shutdown
-process.on("SIGTERM", () => {
-  console.log("SIGTERM received. Shutting down gracefully...");
-  server.close(() => {
-    console.log("Server closed");
-    process.exit(0);
-  });
-});
