@@ -5,12 +5,21 @@ function FoodCategories() {
     <>
       <div
         id="food-categories"
-        className="z-10 relative snap-end h-screen-navbar flex flex-col items-center justify-center gap-8 lg:gap-16 mx-auto   px-6  lg:px-16 lg:h-screen"
+        className="z-10 text-white relative snap-end my-24  flex flex-col items-center justify-center lg:gap-2  mx-auto   px-2  lg:px-16 lg:h-screen"
       >
         <FallingElementsPage />
-        <div className=" w-[80%] mx-auto grid p-2 gap-4 grid-cols-1 md:grid-cols-6 text-white">
+        <div className="text-center p-4 mt-8">
+          <h1 className="text-2xl font-bold mb-4 z-10 pointer-events-none">
+            En värld av smaker för alla kök
+          </h1>
+          <h2 className="lg:w-[500px] ">
+            Utforska vårt breda sortiment som täcker allt från snabbmat till
+            gourmetmåltider. Vi har något för varje restaurangkoncept.
+          </h2>
+        </div>
+        <div className="w-full lg:w-[80%] mx-auto grid p-6 gap-4 grid-cols-1 md:grid-cols-6 ">
           {/* Gateway to Asia */}
-          <div className="md:h-64 relative p-6 md:rounded-tl-3xl md:col-span-3 flex flex-col justify-center overflow-hidden">
+          <div className="h-24 lg:h-52 relative p-6 md:rounded-tl-3xl md:col-span-3 flex flex-col justify-center overflow-hidden">
             <h2 className="text-2xl font-bold mb-4 z-10 pointer-events-none">
               Gateway to Asia
             </h2>
@@ -26,7 +35,7 @@ function FoodCategories() {
           </div>
 
           {/* Fastfood */}
-          <div className="md:h-64 relative  p-6  md:rounded-tr-3xl md:col-span-3 flex flex-col justify-center overflow-hidden ">
+          <div className="h-24 lg:h-52 relative  p-6  md:rounded-tr-3xl md:col-span-3 flex flex-col justify-center overflow-hidden ">
             <h2 className="text-2xl font-bold mb-4 z-10 pointer-events-none">
               Fastfood
             </h2>
@@ -42,7 +51,7 @@ function FoodCategories() {
           </div>
 
           {/* Cocktails & Herbs */}
-          <div className="relative  p-6 md:rounded-bl-3xl md:col-span-2 flex flex-col justify-center overflow-hidden">
+          <div className="h-24 md:h-32 relative  p-6 md:rounded-bl-3xl md:col-span-2 flex flex-col justify-center overflow-hidden">
             <h2 className="text-2xl font-bold mb-4 z-10 pointer-events-none">
               Cocktails & Herbs
             </h2>
@@ -58,7 +67,7 @@ function FoodCategories() {
           </div>
 
           {/* Storkök & Schoolfood */}
-          <div className="relative p-6 md:col-span-2 flex flex-col justify-center overflow-hidden">
+          <div className="h-24 md:h-32 relative p-6 md:col-span-2 flex flex-col justify-center overflow-hidden">
             <h2 className="text-2xl font-bold mb-4 z-10 pointer-events-none">
               Schoolfood
             </h2>
@@ -74,7 +83,7 @@ function FoodCategories() {
           </div>
 
           {/* Lunch & Comfortfood */}
-          <div className="md:h-40 relative  p-6 md:rounded-br-3xl md:col-span-2 flex flex-col justify-center overflow-hidden">
+          <div className="h-24 md:h-32 relative  p-6 md:rounded-br-3xl md:col-span-2 flex flex-col justify-center overflow-hidden">
             <h2 className="text-2xl font-bold mb-4 z-10 pointer-events-none">
               Lunch & Comfortfood
             </h2>

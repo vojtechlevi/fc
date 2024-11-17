@@ -103,7 +103,7 @@ const styles = `
       transform: translateY(-500px) rotate(0deg);
     }
     100% {
-      transform: translateY(100vh) rotate(${90 + Math.random() * 270}deg);
+      transform: translateY(110vh) rotate(${90 + Math.random() * 270}deg);
     }
   }
 

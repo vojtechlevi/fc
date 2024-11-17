@@ -3,6 +3,7 @@ import { IoPricetagOutline } from "react-icons/io5";
 import { LuBarChartBig } from "react-icons/lu";
 import { RiCustomerService2Fill } from "react-icons/ri";
 import FoodCategories from "./FoodCategories";
+import Newsletter from "./Newsletter";
 
 function About() {
   return (
@@ -159,6 +160,8 @@ function About() {
           </div>
         </div>
       </section>
+
+      <Newsletter />
     </>
   );
 }

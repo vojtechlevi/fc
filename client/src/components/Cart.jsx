@@ -28,14 +28,17 @@ export default function CartPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("https://fc-dlr5.onrender.com/send-order", {
-      //https://fc-dlr5.onrender.com
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, email, cartItems }),
-    });
+    const response = await fetch(
+      "https://fc-dlr5.onrender.com/api/send-order",
+      {
+        //https://fc-dlr5.onrender.com
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, cartItems }),
+      }
+    );
 
     if (!response.ok) {
       // Om svaret inte är ok, kasta ett fel
