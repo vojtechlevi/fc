@@ -6,8 +6,7 @@ const client = require("@sendgrid/client");
 client.setApiKey(process.env.SENDGRID_API_KEY);
 
 const subscribe = async (req, res, next) => {
-  console.log("API Key:", process.env.SENDGRID_API_KEY);
-  console.log("List ID:", process.env.SENDGRID_MAILING_ID);
+
 
   try {
     const { email } = req.body;
