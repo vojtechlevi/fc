@@ -11,9 +11,6 @@ const errorHandler = require("./src/middleware/errorHandler");
 const app = express();
 const port = process.env.PORT || 5000;
 
-console.log("API Key:", process.env.SENDGRID_API_KEY);
-console.log("List ID:", process.env.SENDGRID_MAILING_ID);
-
 // Middleware
 app.use(
   cors({
