@@ -1,58 +1,46 @@
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
 const bodyParser = require("body-parser");
-const sgMail = require("@sendgrid/mail");
+require("dotenv").config();
+
+// Import routes
+const orderRoutes = require("./src/routes/orderRoutes");
+const newsletterRoutes = require("./src/routes/newsletterRoutes");
+const errorHandler = require("./src/middleware/errorHandler");
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
-app.use(cors());
+console.log("API Key:", process.env.SENDGRID_API_KEY);
+console.log("List ID:", process.env.SENDGRID_MAILING_ID);
+
+// Middleware
+app.use(
+  cors({
+    origin: process.env.ALLOWED_ORIGINS?.split(",") || "*",
+    methods: ["POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 app.use(bodyParser.json());
 
-// Set SendGrid API key
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// Routes
+app.use("/api", orderRoutes);
+app.use("/api", newsletterRoutes);
 
-app.post("/send-order", async (req, res) => {
-  const { name, email, cartItems } = req.body;
+// Error handling middleware
+app.use(errorHandler);
 
-  // Check if cartItems is defined and not empty
-  if (!cartItems || cartItems.length === 0) {
-    return res.status(400).json({ message: "Cart is empty or undefined." });
-  }
-
-  // Format cart items for email content
-  const formattedCartItems = cartItems
-    .map(
-      (item) =>
-        `- ${item.name} (${item.unit}): ${item.quantity} x ${item.price} kr`
-    )
-    .join("\n");
-
-  // Log the formatted cart items for debugging
-  console.log("Formatted cart items:", formattedCartItems);
-
-  // Email content
-  const msg = {
-    to: "leviekstrom@fruktcentralen.se", // Recipient's email address
-    from: "leviekstrom@fruktcentralen.se", // Verified sender's email address
-    subject: `New Order from ${name}`,
-    text: `Name: ${name}\nEmail: ${email}\nOrder:\n${formattedCartItems}`,
-  };
-
-  try {
-    // Send email
-    await sgMail.send(msg);
-    res.status(200).json({ message: "Order has been sent!" });
-  } catch (error) {
-    console.error(
-      "Error sending email:",
-      error.response ? error.response.body : error
-    );
-    res.status(500).json({ message: "Failed to send order." });
-  }
-});
-
+// Start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+});
+
+// Graceful shutdown
+process.on("SIGTERM", () => {
+  console.log("SIGTERM received. Shutting down gracefully...");
+  server.close(() => {
+    console.log("Server closed");
+    process.exit(0);
+  });
 });
