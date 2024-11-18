@@ -10,10 +10,7 @@ const Home = () => {
   return (
     <>
       <Navbar mainRef={mainRef} />
-      <main
-        ref={mainRef}
-        className="lg:snap-y lg:snap-mandatory lg:h-screen lg:overflow-y-scroll"
-      >
+      <main ref={mainRef}>
         <Hero />
         <About />
         <Footer />

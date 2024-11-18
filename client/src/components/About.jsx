@@ -12,7 +12,7 @@ function About() {
         id="about"
         className="snap-end   flex flex-col items-center justify-center gap-8 lg:gap-16 mx-auto my-24 max-w-[1440px] px-6 lg:my-36 lg:px-16 lg:h-screen"
       >
-        <div className=" items-center mt-6 justify-items-center px-4 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-10  ">
+        <div className=" items-center mt-6 justify-items-center px-4 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-10 2xl:scale-[1.8]">
           <div className="flex flex-col gap-6 order-2 lg:order-1">
             <h2 className="text-4xl font-bold md:text-5xl">Om oss</h2>
             <article className="flex flex-col gap-4">
@@ -88,7 +88,7 @@ function About() {
         id="sustainability"
         className="snap-end  flex flex-col items-center justify-center gap-8 lg:gap-16 mx-auto my-24 max-w-[1440px] px-6 lg:my-32 lg:px-16 lg:h-screen"
       >
-        <div className='items-center justify-items-center px-4 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-10 md:[&amp;>div]:even:order-2 md:group-data-[reverse="true"]:[&amp;>div]:odd:order-2 md:group-data-[reverse="true"]:[&amp;>div]:even:order-1 md:[&amp;>img]:even:order-1'>
+        <div className="items-center justify-items-center px-4 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-10 2xl:scale-[1.8]">
           <img
             alt="Bild för text blocket"
             loading="lazy"
@@ -160,7 +160,6 @@ function About() {
           </div>
         </div>
       </section>
-
       <Newsletter />
     </>
   );

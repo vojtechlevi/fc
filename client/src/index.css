@@ -17,6 +17,7 @@ input:-webkit-autofill:active {
 body {
   background-color: #ffffff;
   color: #1e1e1e;
+  scroll-behavior: smooth;
 }
 
 .h-screen-navbar {

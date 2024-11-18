@@ -8,12 +8,13 @@ import { useCart } from "../utils/cartContext";
 import logo1 from "../assets/FruktCentralen-logo-white-text.svg";
 import logo2 from "../assets/FruktCentralen-logo-black-text.svg";
 
-export default function Navbar({ mainRef }) {
+export default function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [isFoodCategoriesVisible, setIsFoodCategoriesVisible] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const handleMenu = () => {
     setShowMenu(!showMenu);
@@ -22,71 +23,45 @@ export default function Navbar({ mainRef }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (mainRef && mainRef.current && mainRef.current.scrollTop > 460) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setScrollDirection("down");
+      } else if (currentScrollY < lastScrollY) {
+        setScrollDirection("up");
       }
+
+      setLastScrollY(currentScrollY);
+      setScrollPosition(currentScrollY);
     };
 
-    const mainElement = mainRef ? mainRef.current : null;
-    if (mainElement) {
-      mainElement.addEventListener("scroll", handleScroll);
-    }
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      if (mainElement) {
-        mainElement.removeEventListener("scroll", handleScroll);
-      }
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [mainRef]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.target.id === "food-categories") {
-            setIsFoodCategoriesVisible(entry.isIntersecting);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    const foodCategoriesSection = document.getElementById("food-categories");
-    if (foodCategoriesSection) {
-      observer.observe(foodCategoriesSection);
-    }
-
-    return () => {
-      if (foodCategoriesSection) {
-        observer.unobserve(foodCategoriesSection);
-      }
-    };
-  }, []);
+  }, [lastScrollY]);
 
   return (
     <>
       <div className="relative">
         <div
-          className={`fixed top-0 left-0 flex z-20 justify-between items-center h-20 w-full px-6 lg:px-20 transition-colors duration-300 ${
-            isHomePage && !scrolled
-              ? " text-white"
-              : isFoodCategoriesVisible
-                ? " text-white"
-                : " text-black"
-          } ${showMenu ? "md:bg-transparent" : ""}`}
+          className={`fixed top-0 left-0 flex z-20 justify-between items-center h-20 w-full px-6 lg:px-20 transition-all duration-300 ${
+            scrollDirection === "down"
+              ? "opacity-0 -translate-y-full"
+              : "opacity-100 translate-y-0"
+          } ${
+            scrollPosition > 650
+              ? "bg-white shadow-md"
+              : isHomePage
+                ? "bg-transparent text-white"
+                : "bg-white"
+          }`}
         >
           <div className="flex items-center ">
             <Link href="/">
               <img
-                src={
-                  isHomePage && !scrolled && !showMenu
-                    ? logo1
-                    : isFoodCategoriesVisible
-                      ? logo1
-                      : logo2
-                }
+                src={!isHomePage || scrollPosition > 400 ? logo2 : logo1}
                 alt="Fruktcentralen logotyp"
                 className="w-44 md:w-64"
               />

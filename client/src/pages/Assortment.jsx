@@ -137,8 +137,8 @@ const Assortment = () => {
               </ul>
             </div>
           </div>
-          <div className="w-full pl-0 md:pl-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 ">
+          <div className="w-full pl-0 md:px-2">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 ">
               {filteredProducts.map((product) => (
                 <div
                   key={product.id}
@@ -147,11 +147,11 @@ const Assortment = () => {
                   <img
                     src={product.image_url || "/placeholder.jpg"}
                     alt={product.name}
-                    className="h-36 w-full object-contain p-2 rounded-t-lg drop-shadow-lg"
+                    className="h-40 w-full object-contain p-2 rounded-t-lg drop-shadow-lg"
                   />
                   <div className="w-full h-[1px] bg-gray-300 mb-2 relative flex"></div>
                   <div className="px-4 pb-4">
-                    <h3 className="text-[10px] text-black w-full font-semibold">
+                    <h3 className=" text-black w-full font-semibold">
                       {product.name}
                     </h3>
                     <p className="text-black text-[7px] h-8">
