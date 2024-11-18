@@ -8,7 +8,7 @@ import ProductList from "../components/ProductList";
 import CartPage from "../components/Cart";
 import PdfViewer from "../components/PdfViewer";
 const Dashboard = () => {
-  const [activeTab, setActiveTab] = useState("profile");
+  const [activeTab, setActiveTab] = useState("shop");
   const { user, profile, setProfile } = useContext(UserContext);
 
   useEffect(() => {
@@ -52,10 +52,9 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row min-h-screen ">
+      <div className="flex flex-col lg:flex-row min-h-screen mx-auto justify-center items-center max-w-[1440px] ">
         <Nav activeTab={activeTab} setActiveTab={setActiveTab} />
-        {/* Content Area */}
-        <div className="flex-1 px-4 pt-32 bg-[#f0f0f0]">{renderContent()}</div>
+        <div className="min-h-screen w-full pt-32 px-4 ">{renderContent()}</div>
       </div>
     </>
   );

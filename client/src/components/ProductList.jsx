@@ -183,20 +183,21 @@ const ProductList = () => {
   ].sort((a, b) => b.length - a.length);
   const subCategories = selectedCategory
     ? [
-        ...new Set(
-          products
-            .filter((product) => product.category === selectedCategory)
-            .map((product) => product.subcategory)
-        ),
-      ].sort((a, b) => a.localeCompare(b))
+      ...new Set(
+        products
+          .filter((product) => product.category === selectedCategory)
+          .map((product) => product.subcategory)
+      ),
+    ].sort((a, b) => a.localeCompare(b))
     : [];
 
   if (loading) return <p>Loading...</p>;
 
   return (
     <>
-      <div className="flex flex-col md:flex-row">
-        <div className="w-full p-2 rounded-lg md:w-1/6 text-black bg-white">
+
+      <div className="flex flex-col lg:flex-row w-full  max-w-[1440px] min-h-screen ">
+        <div className="w-full p-2 rounded-lg lg:w-[300px] text-black">
           <input
             type="text"
             placeholder="Sök produkt"
@@ -214,9 +215,8 @@ const ProductList = () => {
             <h3 className="text-base font-bold mb-4">Kategorier</h3>
             <ul className="text-base">
               <li
-                className={`cursor-pointer mb-2 2xl:text-xl ${
-                  selectedCategory === "" ? "font-semibold" : ""
-                }`}
+                className={`cursor-pointer mb-2 2xl:text-xl ${selectedCategory === "" ? "font-semibold" : ""
+                  }`}
                 onClick={() => {
                   setSelectedCategory("");
                   setSelectedSubCategory("");
@@ -227,9 +227,8 @@ const ProductList = () => {
               {categories.map((category) => (
                 <div key={category}>
                   <li
-                    className={`cursor-pointer mb-2 hover:underline ${
-                      selectedCategory === category ? "font-semibold" : ""
-                    }`}
+                    className={`cursor-pointer mb-2 hover:underline ${selectedCategory === category ? "font-semibold" : ""
+                      }`}
                     onClick={() => {
                       setSelectedCategory(category);
                       setSelectedSubCategory("");
@@ -242,11 +241,10 @@ const ProductList = () => {
                       {subCategories.map((subcategory) => (
                         <li
                           key={subcategory}
-                          className={`cursor-pointer mb-2 hover:underline ${
-                            selectedSubCategory === subcategory
-                              ? "font-semibold"
-                              : ""
-                          }`}
+                          className={`cursor-pointer mb-2 hover:underline ${selectedSubCategory === subcategory
+                            ? "font-semibold"
+                            : ""
+                            }`}
                           onClick={() => setSelectedSubCategory(subcategory)}
                         >
                           {subcategory}
@@ -347,9 +345,8 @@ const ProductList = () => {
             <h3 className="text-lg font-bold mb-4">Kategorier</h3>
             <ul className="text-sm">
               <li
-                className={`cursor-pointer mb-2 ${
-                  selectedCategory === "" ? "font-semibold" : ""
-                }`}
+                className={`cursor-pointer mb-2 ${selectedCategory === "" ? "font-semibold" : ""
+                  }`}
                 onClick={() => {
                   setSelectedCategory("");
                   setIsModalOpen(false);
@@ -360,9 +357,8 @@ const ProductList = () => {
               {categories.map((category) => (
                 <li
                   key={category}
-                  className={`cursor-pointer mb-2 ${
-                    selectedCategory === category ? "font-semibold" : ""
-                  }`}
+                  className={`cursor-pointer mb-2 ${selectedCategory === category ? "font-semibold" : ""
+                    }`}
                   onClick={() => {
                     setSelectedCategory(category);
                     setIsModalOpen(false);
@@ -377,9 +373,8 @@ const ProductList = () => {
                 <h4 className="text-sm font-bold mt-4 mb-2">Underkategorier</h4>
                 <ul className="text-sm">
                   <li
-                    className={`cursor-pointer mb-2 ${
-                      selectedSubCategory === "" ? "font-semibold" : ""
-                    }`}
+                    className={`cursor-pointer mb-2 ${selectedSubCategory === "" ? "font-semibold" : ""
+                      }`}
                     onClick={() => {
                       setSelectedSubCategory("");
                       setIsModalOpen(false);
@@ -390,11 +385,10 @@ const ProductList = () => {
                   {subCategories.map((subcategory) => (
                     <li
                       key={subcategory}
-                      className={`cursor-pointer mb-2 ${
-                        selectedSubCategory === subcategory
-                          ? "font-semibold"
-                          : ""
-                      }`}
+                      className={`cursor-pointer mb-2 ${selectedSubCategory === subcategory
+                        ? "font-semibold"
+                        : ""
+                        }`}
                       onClick={() => {
                         setSelectedSubCategory(subcategory);
                         setIsModalOpen(false);

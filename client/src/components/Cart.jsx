@@ -51,7 +51,7 @@ export default function CartPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 text-black p-6">
+    <div className="min-h-screen  text-black p-6">
       <h1 className="text-3xl font-bold text-center mb-6">Varukorg</h1>
       {cartItems.length === 0 ? (
         <p className="text-center">Din varukorg är tom.</p>

@@ -46,7 +46,7 @@ export default function Navbar() {
     <>
       <div className="relative flex justify-center items-center">
         <div
-          className={`fixed top-0 flex z-20 max-w-[1440px] w-full justify-between items-center h-20  px-6 lg:px-20 transition-all duration-300 ${scrollDirection === "down"
+          className={`fixed top-0 flex z-20 max-w-[1440px] w-full justify-between items-center h-20  px-6  transition-all duration-300 ${scrollDirection === "down"
             ? "opacity-0 -translate-y-full"
             : "opacity-100 translate-y-0"
             } ${scrollPosition > 650
@@ -155,7 +155,7 @@ export function Nav({ activeTab, setActiveTab }) {
         <div
           className={
             !showMenu
-              ? "bg-white fixed top-0 left-0 flex z-30 justify-between items-center h-24 w-full mx-auto px-6 lg:px-20"
+              ? "bg-white max-w-[1440px] fixed top-0 left-0 right-0 flex z-30 justify-between items-center h-24 w-full mx-auto px-6 "
               : " fixed top-0 z-30 left-0 duration-[400ms]  flex justify-between items-center h-24 w-full mx-auto px-6 lg:px-20 md:bg-transparent"
           }
         >

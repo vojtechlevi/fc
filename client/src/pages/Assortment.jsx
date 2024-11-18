@@ -71,15 +71,15 @@ const Assortment = () => {
   return (
     <>
       <Navbar />
-      <div className="mt-32 px-4 min-h-screen w-full flex items-center justify-center">
-        <div className="flex flex-col lg:flex-row max-w-[1440px]">
-          <div className="w-full p-2 rounded-lg lg:w-1/6 text-black">
+      <div className="w-full flex items-center justify-center">
+        <div className="flex flex-col lg:flex-row mt-24 w-full  max-w-[1440px] min-h-screen ">
+          <div className="w-full p-2 rounded-lg lg:w-[300px] text-black">
             <input
               type="text"
               placeholder="Sök produkter..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="mb-4 w-full p-2 border rounded-md text-[10px] outline-none text-black"
+              className="mb-4 w-full p-2 border rounded-md  outline-none text-black"
             />
             <button
               className="md:hidden text-white p-2 rounded-lg mb-4 bg-green-400"
@@ -98,7 +98,7 @@ const Assortment = () => {
                     setSelectedSubCategory("");
                   }}
                 >
-                  Alla
+                  Visa allt
                 </li>
                 {categories.map((category) => (
                   <div key={category}>
@@ -135,7 +135,7 @@ const Assortment = () => {
             </div>
           </div>
           <div className="w-full pl-0 md:px-2">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 ">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 ">
               {filteredProducts.map((product) => (
                 <div
                   key={product.id}
