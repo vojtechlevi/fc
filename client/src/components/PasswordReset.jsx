@@ -29,7 +29,7 @@ const PasswordReset = ({ showPasswordReset, setShowPasswordReset }) => {
     <div className="absolute top-0 left-0 w-full z-10 h-full flex flex-col items-center justify-center">
       <form
         onSubmit={handlePasswordReset}
-        className="h-[500px] bg-white/50 backdrop-blur-[2px] w-2/3 lg:w-1/4 rounded-lg flex flex-col gap-8 px-12 justify-center border"
+        className="h-[500px] bg-white/70   min-w-[500px] max-w-[500px] rounded-lg flex flex-col gap-12 px-12 justify-center border"
       >
         <input
           type="email"
@@ -37,7 +37,7 @@ const PasswordReset = ({ showPasswordReset, setShowPasswordReset }) => {
           value={email}
           placeholder="Ange din e-postadress"
           onChange={(e) => setEmail(e.target.value)}
-          className=" appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-b-2"
+          className="appearance-none bg-transparent w-full py-2 px-3 text-black placeholder-black leading-tight focus:outline-none focus:shadow-outline border-b-2 border-black"
         />
         <div className="h-[50px]">
           {resetMessage && (

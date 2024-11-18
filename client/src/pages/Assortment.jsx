@@ -58,12 +58,12 @@ const Assortment = () => {
   ].sort((a, b) => b.length - a.length);
   const subCategories = selectedCategory
     ? [
-        ...new Set(
-          products
-            .filter((product) => product.category === selectedCategory)
-            .map((product) => product.subcategory)
-        ),
-      ].sort((a, b) => a.localeCompare(b))
+      ...new Set(
+        products
+          .filter((product) => product.category === selectedCategory)
+          .map((product) => product.subcategory)
+      ),
+    ].sort((a, b) => a.localeCompare(b))
     : [];
 
   if (loading) return <p>Loading...</p>;
@@ -71,8 +71,8 @@ const Assortment = () => {
   return (
     <>
       <Navbar />
-      <div className="mt-32 px-4">
-        <div className="flex flex-col lg:flex-row">
+      <div className="mt-32 px-4 min-h-screen w-full flex items-center justify-center">
+        <div className="flex flex-col lg:flex-row max-w-[1440px]">
           <div className="w-full p-2 rounded-lg lg:w-1/6 text-black">
             <input
               type="text"
@@ -91,9 +91,8 @@ const Assortment = () => {
               <h3 className="text-base font-bold mb-4">Kategorier</h3>
               <ul className="text-base">
                 <li
-                  className={`cursor-pointer mb-2 2xl:text-xl ${
-                    selectedCategory === "" ? "font-semibold" : ""
-                  }`}
+                  className={`cursor-pointer mb-2 2xl:text-xl ${selectedCategory === "" ? "font-semibold" : ""
+                    }`}
                   onClick={() => {
                     setSelectedCategory("");
                     setSelectedSubCategory("");
@@ -104,9 +103,8 @@ const Assortment = () => {
                 {categories.map((category) => (
                   <div key={category}>
                     <li
-                      className={`cursor-pointer mb-2 hover:underline ${
-                        selectedCategory === category ? "font-semibold" : ""
-                      }`}
+                      className={`cursor-pointer mb-2 hover:underline ${selectedCategory === category ? "font-semibold" : ""
+                        }`}
                       onClick={() => {
                         setSelectedCategory(category);
                         setSelectedSubCategory("");
@@ -119,11 +117,10 @@ const Assortment = () => {
                         {subCategories.map((subcategory) => (
                           <li
                             key={subcategory}
-                            className={`cursor-pointer mb-2 hover:underline ${
-                              selectedSubCategory === subcategory
-                                ? "font-semibold"
-                                : ""
-                            }`}
+                            className={`cursor-pointer mb-2 hover:underline ${selectedSubCategory === subcategory
+                              ? "font-semibold"
+                              : ""
+                              }`}
                             onClick={() => setSelectedSubCategory(subcategory)}
                           >
                             {subcategory}

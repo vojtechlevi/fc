@@ -29,7 +29,7 @@ const Contact = () => {
     <>
       <Navbar />
       <div id="Home" className="text-black snap-end mt-20">
-        <div className="relative w-full  py-12 bg- gap-12 mx-auto flex flex-col justify-center bg-gradient-to-b from-transparent from-75% to-white">
+        <div className="relative max-w-[1440px] w-full py-12 bg- gap-12 mx-auto flex flex-col justify-center bg-gradient-to-b from-transparent from-75% to-white">
           {/* <img
             className="w-full h-full object-cover absolute top-0 left-0 -z-10 border-none  "
             src="https://nzcmvlxhpsoqbubjnsyn.supabase.co/storage/v1/object/public/bilder/farm.png?t=2024-11-14T12%3A41%3A38.458Z"
@@ -98,49 +98,49 @@ const Contact = () => {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-14 lg:px-12 xl:grid-cols-4 my-12 ">
-          {employees.map((employee) => (
-            <div
-              key={employee.sys.id}
-              className="mx-auto flex h-full w-fit max-w-full flex-col gap-6 min-w-72"
-            >
-              {/* <img
+          <div className=" justify-items-center grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-14 lg:px-12 xl:grid-cols-4 my-24">
+            {employees.map((employee) => (
+              <div
+                key={employee.sys.id}
+                className="mx-autoflex h-full w-fit max-w-full flex-col gap-6 min-w-72"
+              >
+                {/* <img
               src=""
               alt=""
               className="aspect-square rounded-lg object-cover object-center"
             /> */}
-              <div className="bg-black h-6 w-full"></div>
-              <div className="flex grow flex-col justify-between gap-6">
-                <div>
-                  <h3 className="text-xl font-semibold capitalize md:text-2xl">
-                    {employee.fields.name}
-                  </h3>
-                  <p className="font-normal text-lg">{employee.fields.title}</p>
-                  <a
-                    className="flex items-center gap-2"
-                    href="mailto:lk@fruktcentralen.se"
-                  >
-                    <AtSign size={16} />
+                <div className="bg-black h-6 w-full"></div>
+                <div className="flex grow flex-col justify-between gap-6">
+                  <div>
+                    <h3 className="text-xl font-semibold capitalize md:text-2xl">
+                      {employee.fields.name}
+                    </h3>
+                    <p className="font-normal text-lg">{employee.fields.title}</p>
+                    <a
+                      className="flex items-center gap-2"
+                      href="mailto:lk@fruktcentralen.se"
+                    >
+                      <AtSign size={16} />
 
-                    <p className="font-normal text-base pb-[3px]">
-                      {employee.fields.mail}
-                    </p>
-                  </a>
-                  <a className="flex items-center gap-2" href="tel:031225690">
-                    <Phone size={16} />
+                      <p className="font-normal text-base pb-[3px]">
+                        {employee.fields.mail}
+                      </p>
+                    </a>
+                    <a className="flex items-center gap-2" href="tel:031225690">
+                      <Phone size={16} />
 
-                    <p className="font-normal text-base pb-[3px]">
-                      {employee.fields.phone}
-                    </p>
-                  </a>
+                      <p className="font-normal text-base pb-[3px]">
+                        {employee.fields.phone}
+                      </p>
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
+
       <Footer />
     </>
   );

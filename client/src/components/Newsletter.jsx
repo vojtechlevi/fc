@@ -41,15 +41,15 @@ const Newsletter = () => {
   };
 
   return (
-    <section className=" flex flex-col items-center justify-center gap-8 lg:gap-16 mx-auto my-24 max-w-[1440px] px-6  lg:px-16 ">
-      <div className="lg:h-1/2 relative grid items-center gap-10 py-[15%] px-[4%]  md:p-[6%] lg:grid-cols-2 overflow-hidden rounded-lg 2xl:scale-[1.5] ">
+    <section className=" flex flex-col items-center justify-center gap-8 lg:gap-16 mx-auto my-24 max-w-[1440px]  ">
+      <div className=" relative grid items-center gap-10 py-[15%] px-[4%]  md:p-[6%] lg:grid-cols-2 overflow-hidden 2xl:rounded-lg ">
         <img
           src="https://images.unsplash.com/photo-1609869882537-6a860e45a0d6?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Röd paprika"
           srcSet=""
           className="absolute w-full h-full aspect-square object-cover object-center -z-10 rounded-lg translate-y-40 translate-x-24 md:translate-x-40 md:translate-y-0"
         />
-        <div className="absolute bg-black w-full h-full aspect-square object-cover object-center -z-20 rounded-lg"></div>
+        <div className="absolute bg-black w-full h-full aspect-square object-cover object-center -z-20 2xl:rounded-lg"></div>
         <div className="flex flex-col">
           <h3 className="text-3xl font-semibold text-white">
             Prenumerera på vårt nyhetsbrev
@@ -104,11 +104,10 @@ const Newsletter = () => {
 
           {message && (
             <p
-              className={`mt-2 ${
-                status === "success"
-                  ? "text-green-400 dark:text-green-400"
-                  : "text-pink-500 dark:text-pink-500"
-              }`}
+              className={`mt-2 ${status === "success"
+                ? "text-green-400 dark:text-green-400"
+                : "text-pink-500 dark:text-pink-500"
+                }`}
             >
               {message}
             </p>

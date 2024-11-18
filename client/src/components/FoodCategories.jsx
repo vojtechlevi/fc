@@ -6,10 +6,10 @@ function FoodCategories() {
     <>
       <div
         id="food-categories"
-        className="z-10 text-white relative snap-end my-24  flex flex-col items-center justify-center lg:gap-2  mx-auto   px-2  lg:px-16 lg:h-screen"
+        className="z-10 text-white  relative snap-end py-24  flex flex-col items-center justify-center max-w-[1440px] xl:rounded-3xl lg:gap-2  mx-auto px-2  lg:px-16"
       >
         <FallingElementsPage />
-        <div className="2xl:scale-[2] items-center flex flex-col">
+        <div className=" items-center flex flex-col">
           <div className="text-center  mt-8 items-center flex flex-col gap-4">
             <h1 className="text-2xl md:text-5xl font-bold z-10 pointer-events-none">
               En värld av smaker för alla kök

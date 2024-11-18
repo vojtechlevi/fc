@@ -63,23 +63,23 @@ const Login = () => {
             <img
               src="https://images.unsplash.com/photo-1700046193059-990728fd7ce4?q=80&w=2992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="harvest"
-              className="object-contain aspect-square h-full w-full translate-y-[200px] z-10 translate-x-[240px]  md:translate-y-[100px] md:-translate-x-[500px] md:scale-x-[-1] rotate-[20deg] "
+              className="object-contain aspect-square h-full w-full translate-y-[200px] z-10 translate-x-[240px]  md:translate-y-[100px] md:-translate-x-[500px] md:scale-x-[-1] rotate-[20deg] xl:-translate-x-[800px] "
             />
             <img
               src="https://images.unsplash.com/photo-1700046193059-990728fd7ce4?q=80&w=2992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="harvest"
-              className="absolute top-0 left-2 object-contain aspect-square h-full w-full rotate-180 md:rotate-0 -translate-x-[180px] -translate-y-[200px]  md:-translate-y-[0px] md:translate-x-[500px]"
+              className="absolute top-0 left-2 object-contain aspect-square h-full w-full rotate-180 md:rotate-0 -translate-x-[180px] -translate-y-[200px]  md:-translate-y-[0px] md:translate-x-[500px] xl:hidden"
             />
           </div>
           <div className="absolute top-0 left-0 w-full lg:z-10 h-full flex flex-col items-center justify-center">
             {!showPasswordReset ? (
               <form
                 onSubmit={signInWithPassword}
-                className="h-[500px] bg-white/50 backdrop-blur-[2px] w-2/3 lg:w-1/4 rounded-lg flex flex-col gap-12 px-12 justify-center border"
+                className="h-[500px] bg-white/70  w-[90%] md:w-1/3 2xl:w-[20%] rounded-lg flex flex-col gap-12 px-12 justify-center border"
               >
                 <div className="">
                   <input
-                    className=" appearance-none bg-transparent w-full py-2 px-3 text-black placeholder-gray-500 leading-tight focus:outline-none focus:shadow-outline border-b-2 border-gray-500"
+                    className=" appearance-none bg-transparent w-full py-2 px-3 text-black placeholder-black leading-tight focus:outline-none focus:shadow-outline border-b-2 border-gray-500"
                     id="email"
                     type="email"
                     name="email"
@@ -90,7 +90,7 @@ const Login = () => {
                 </div>
                 <div className="">
                   <input
-                    className=" appearance-none bg-transparent w-full py-2 px-3 text-black placeholder-gray-500 leading-tight focus:outline-none focus:shadow-outline border-b-2 border-gray-500"
+                    className=" appearance-none bg-transparent w-full py-2 px-3 text-black placeholder-black leading-tight focus:outline-none focus:shadow-outline border-b-2 border-gray-500"
                     id="password"
                     type="password"
                     name="password"

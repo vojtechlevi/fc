@@ -44,19 +44,17 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="relative">
+      <div className="relative flex justify-center items-center">
         <div
-          className={`fixed top-0 left-0 flex z-20 justify-between items-center h-20 w-full px-6 lg:px-20 transition-all duration-300 ${
-            scrollDirection === "down"
-              ? "opacity-0 -translate-y-full"
-              : "opacity-100 translate-y-0"
-          } ${
-            scrollPosition > 650
-              ? "bg-white shadow-md"
+          className={`fixed top-0 flex z-20 max-w-[1440px] w-full justify-between items-center h-20  px-6 lg:px-20 transition-all duration-300 ${scrollDirection === "down"
+            ? "opacity-0 -translate-y-full"
+            : "opacity-100 translate-y-0"
+            } ${scrollPosition > 650
+              ? "bg-white"
               : isHomePage
                 ? "bg-transparent text-white"
                 : "bg-white"
-          }`}
+            }`}
         >
           <div className="flex items-center ">
             <Link href="/">
@@ -173,11 +171,10 @@ export function Nav({ activeTab, setActiveTab }) {
               <li>
                 <button
                   onClick={() => setActiveTab("shop")}
-                  className={`w-full text-left py-2 px-4 rounded-lg transition-colors duration-300 ease-in ${
-                    activeTab === "shop"
-                      ? "bg-green-500 text-white "
-                      : " text-black"
-                  }`}
+                  className={`w-full text-left py-2 px-4 rounded-lg transition-colors duration-300 ease-in ${activeTab === "shop"
+                    ? "bg-green-500 text-white "
+                    : " text-black"
+                    }`}
                 >
                   Beställning
                 </button>
@@ -185,11 +182,10 @@ export function Nav({ activeTab, setActiveTab }) {
               <li>
                 <button
                   onClick={() => setActiveTab("kampanjer")}
-                  className={`w-full text-left py-2 px-4 rounded-lg transition-colors duration-300 ease-in ${
-                    activeTab === "kampanjer"
-                      ? "bg-green-500 text-white"
-                      : "text-black"
-                  }`}
+                  className={`w-full text-left py-2 px-4 rounded-lg transition-colors duration-300 ease-in ${activeTab === "kampanjer"
+                    ? "bg-green-500 text-white"
+                    : "text-black"
+                    }`}
                 >
                   Kampanjer
                 </button>
@@ -197,11 +193,10 @@ export function Nav({ activeTab, setActiveTab }) {
               <li>
                 <button
                   onClick={() => setActiveTab("prislista")}
-                  className={`w-full text-left py-2 px-4 rounded-lg transition-colors duration-300 ease-in ${
-                    activeTab === "prislista"
-                      ? "bg-green-500 text-white"
-                      : "text-black"
-                  }`}
+                  className={`w-full text-left py-2 px-4 rounded-lg transition-colors duration-300 ease-in ${activeTab === "prislista"
+                    ? "bg-green-500 text-white"
+                    : "text-black"
+                    }`}
                 >
                   Prislista
                 </button>
@@ -276,10 +271,9 @@ export function Nav({ activeTab, setActiveTab }) {
 
       <div
         className={` flex justify-center items-center
-          ${
-            showMenu
-              ? `fixed text-white bg-[#ffffff] z-20 right-0 top-0 w-[100%] opacity-100 h-screen duration-[1s] md:hidden `
-              : " fixed  z-20 top-[-100%] w-[100%] h-screen bg-[#ffffff] opacity-0 duration-[1s]"
+          ${showMenu
+            ? `fixed text-white bg-[#ffffff] z-20 right-0 top-0 w-[100%] opacity-100 h-screen duration-[1s] md:hidden `
+            : " fixed  z-20 top-[-100%] w-[100%] h-screen bg-[#ffffff] opacity-0 duration-[1s]"
           }`}
       >
         <div className="p-4 flex flex-col gap-4">
@@ -293,11 +287,10 @@ export function Nav({ activeTab, setActiveTab }) {
                   setActiveTab("shop");
                   handleMenu();
                 }}
-                className={`w-full  py-2 px-4 rounded-lg ${
-                  activeTab === "shop"
-                    ? "bg-green-600 text-white"
-                    : "text-black"
-                }`}
+                className={`w-full  py-2 px-4 rounded-lg ${activeTab === "shop"
+                  ? "bg-green-600 text-white"
+                  : "text-black"
+                  }`}
               >
                 Beställning
               </button>
@@ -308,11 +301,10 @@ export function Nav({ activeTab, setActiveTab }) {
                   setActiveTab("kampanjer");
                   handleMenu();
                 }}
-                className={`w-full  py-2 px-4 rounded-lg ${
-                  activeTab === "kampanjer"
-                    ? "bg-green-600 text-white"
-                    : "text-black"
-                }`}
+                className={`w-full  py-2 px-4 rounded-lg ${activeTab === "kampanjer"
+                  ? "bg-green-600 text-white"
+                  : "text-black"
+                  }`}
               >
                 Kampanjer
               </button>
@@ -323,11 +315,10 @@ export function Nav({ activeTab, setActiveTab }) {
                   setActiveTab("prislista");
                   handleMenu();
                 }}
-                className={`w-full  py-2 px-4 rounded-lg ${
-                  activeTab === "prislista"
-                    ? "bg-green-600 text-white"
-                    : "text-black"
-                }`}
+                className={`w-full  py-2 px-4 rounded-lg ${activeTab === "prislista"
+                  ? "bg-green-600 text-white"
+                  : "text-black"
+                  }`}
               >
                 Prislista
               </button>

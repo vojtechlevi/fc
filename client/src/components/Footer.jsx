@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Newsletter from "./Newsletter.jsx";
 import logo from "../assets/logo.png";
 import facebook from "../assets/facebook.png";
 import instagram from "../assets/instagram.png";
@@ -10,11 +9,11 @@ const Footer = () => {
   return (
     <>
       <div
-        className="snap-end flex flex-col justify-between p-12 bg-auto border-black"
-        /* style={{ backgroundImage: `url(${footerPattern})` }} */
+        className="flex flex-col justify-center items-center  bg-auto  border-t-2"
+      /* style={{ backgroundImage: `url(${footerPattern})` }} */
       >
-        <div className="flex justify-between">
-          <div className="w-[700px] flex flex-col ">
+        <div className="flex max-w-[1440px] w-full justify-between p-12 ">
+          <div className=" flex flex-col ">
             <div className="flex flex-col md:flex-row  mb-4 gap-12 font-thin">
               <div className="gap-2 flex flex-col">
                 <p className="font-bold text-base">Öppettider</p>

@@ -10,7 +10,6 @@ const FallingElements = () => {
     "https://nzcmvlxhpsoqbubjnsyn.supabase.co/storage/v1/object/public/produkt-bilder/frukt-gront/gront/aubergine.png",
     "https://nzcmvlxhpsoqbubjnsyn.supabase.co/storage/v1/object/public/produkt-bilder/frukt-gront/lok/Salladslok.png",
     "https://nzcmvlxhpsoqbubjnsyn.supabase.co/storage/v1/object/public/produkt-bilder/frukt-gront/lok/Purjolok.png?t=2024-11-15T21%3A22%3A53.664Z",
-    "https://nzcmvlxhpsoqbubjnsyn.supabase.co/storage/v1/object/public/produkt-bilder/frukt-gront/sallad/Rosesallat.png",
     "https://nzcmvlxhpsoqbubjnsyn.supabase.co/storage/v1/object/public/produkt-bilder/frukt-gront/sallad/Lollo%20Rosso.png",
     "https://nzcmvlxhpsoqbubjnsyn.supabase.co/storage/v1/object/public/produkt-bilder/frukt-gront/farska-kryddor/Rosmarin.png",
     "https://nzcmvlxhpsoqbubjnsyn.supabase.co/storage/v1/object/public/produkt-bilder/frukt-gront/kal/Svartkal.png",
@@ -22,15 +21,18 @@ const FallingElements = () => {
 
   const generateId = () => Math.random().toString(36).substr(2, 9);
 
-  const createFallingElement = () => {
+  const createFallingElement = (size) => {
     const startPosition = Math.random() * (window.innerWidth - 40);
-    const duration = 4 + Math.random() * 10;
-    const size = Math.random() * 10 + 5; // Increased size range from 5-25
+    const duration = 5 + Math.random() * 5; // Increased duration range
 
-    // Enhanced blur logic based on size
     const getBlurAmount = (elementSize) => {
-      if (elementSize < 10) return "blur(3px)";
+      if (elementSize < 8) return "blur(3px)";
       return "none";
+    };
+
+    const getDuration = (elementSize) => {
+      if (elementSize < 8) return "12";
+      return "8";
     };
 
     return {
@@ -38,58 +40,65 @@ const FallingElements = () => {
       emoji: fruits[Math.floor(Math.random() * fruits.length)],
       style: {
         left: `${startPosition}px`,
-        animationDuration: `${duration}s`,
-        width: `${size}vw`, // Using vw for responsive sizing
+        width: `${size}vw`,
+        animationDuration: `${getDuration(size)}s`, // Using the new duration
         filter: getBlurAmount(size),
-        zIndex: Math.floor(size), // Layer elements based on size
+        zIndex: Math.floor(size),
       },
-      duration,
+      duration, // Keeping the original duration
     };
   };
 
   const addElements = (count = 1) => {
     const newElements = Array(count)
       .fill(null)
-      .map(() => createFallingElement());
+      .map(() => {
+        const largerSize = 8;
+        const smallerSize = 6;
+
+        return [
+          createFallingElement(largerSize),
+          createFallingElement(smallerSize),
+        ];
+      })
+      .flat();
 
     setElements((prev) => [...prev, ...newElements]);
 
-    // Remove elements after their animation completes
     newElements.forEach((element) => {
+      const containerHeight = window.innerHeight;
+      const elementBottom = element.style.top ? parseInt(element.style.top) + 100 : 0;
+
       setTimeout(() => {
         setElements((prev) => prev.filter((el) => el.id !== element.id));
-      }, element.duration * 1000);
+      }, (containerHeight - elementBottom) / 100 * element.duration * 1000);
     });
   };
 
   useEffect(() => {
-    // Create more initial elements (20 instead of 10)
-
-    // Add elements more frequently (every 500ms instead of 2000ms)
-    // And add multiple elements each time (2-4 elements)
     const interval = setInterval(() => {
-      const count = Math.floor(Math.random() * 2) + 2; // 2-4 elements
+      const count = Math.floor(Math.random() * 2) + 2;
       addElements(count);
-    }, 1000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="inset-0 pointer-events-none overflow-hidden">
-      {elements.map((element) => (
+      {elements.map((element, index) => (
         <div
           key={element.id}
           className="absolute animate-fall"
           style={{
             ...element.style,
+            transform: index % 2 === 0 ? "scale(1)" : "scale(0.7)",
           }}
         >
           <img
             src={element.emoji}
             alt="grönsak"
             className="w-full h-auto"
-            // Random initial rotation
           />
         </div>
       ))}
@@ -100,10 +109,10 @@ const FallingElements = () => {
 const styles = `
   @keyframes fall {
     0% {
-      transform: translateY(-500px) rotate(0deg);
+      transform: translateY(-500px) rotate(0deg)
     }
     100% {
-      transform: translateY(110vh) rotate(${90 + Math.random() * 270}deg);
+      transform: translateY(120vh) rotate(${90 + Math.random() * 270}deg);
     }
   }
 
@@ -114,7 +123,7 @@ const styles = `
 
 const FallingElementsPage = () => {
   return (
-    <div className="bg-black absolute h-full w-full overflow-x-hidden -z-10 pointer-events-none">
+    <div className="bg-black absolute h-full 2xl:rounded-3xl w-full overflow-hidden -z-10 pointer-events-none">
       <style>{styles}</style>
       <FallingElements />
     </div>

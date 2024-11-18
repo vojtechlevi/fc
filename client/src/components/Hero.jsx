@@ -7,10 +7,10 @@ function Hero() {
     }
   };
   return (
-    <div id="Home" className="text-white snap-end h-screen">
-      <div className="relative w-full h-screen-navbar mx-auto flex flex-col justify-center lg:items-start bg-gradient-to-b from-transparent from-75% to-white">
+    <div id="Home" className="text-white snap-end">
+      <div className="relative h-[800px] max-w-[1440px] mx-auto flex flex-col justify-center lg:items-start bg-gradient-to-b from-transparent from-75% to-white">
         <img
-          className="w-full h-screen-navbar object-cover absolute top-0 left-0 -z-10 border-none"
+          className="w-full h-[800px] object-cover absolute top-0 left-0 -z-10 border-none"
           src="https://nzcmvlxhpsoqbubjnsyn.supabase.co/storage/v1/object/public/bilder/farm.png?t=2024-11-14T12%3A41%3A38.458Z"
           alt="farm"
           loading="lazy"
