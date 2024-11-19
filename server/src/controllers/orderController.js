@@ -1,6 +1,7 @@
 const sgMail = require("../config/sendgrid");
 
 const sendOrder = async (req, res, next) => {
+
   try {
     const { name, email, cartItems } = req.body;
 
@@ -11,21 +12,45 @@ const sendOrder = async (req, res, next) => {
     const formattedCartItems = cartItems
       .map(
         (item) =>
-          `- ${item.name} (${item.unit}): ${item.quantity} x ${item.price} kr`
+          `- ${item.name} (${item.unit}): ${item.quantity} kr`
       )
       .join("\n");
 
-    const msg = {
-      to: "leviekstrom@fruktcentralen.se",
-      from: "leviekstrom@fruktcentralen.se",
-      subject: `New Order from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nOrder:\n${formattedCartItems}`,
+    // Mail till företaget
+    const companyMsg = {
+      to: process.env.FC_ORDER_MAIL,
+      from: process.env.FC_SENDER_MAIL,
+      subject: `Ny beställning från ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\n\nBeställning:\n${formattedCartItems}`,
     };
 
-    await sgMail.send(msg);
-    res.status(200).json({ message: "Order has been sent!" });
+    // Bekräftelsemail till kunden
+    const customerMsg = {
+      to: email,
+      from: process.env.FC_SENDER_MAIL,
+      templateId: "d-d709848908ac49b68c447a044756aba1",
+      dynamicTemplateData: {
+        name: name,
+        orderDetails: cartItems.map(item => ({
+          itemName: item.name,
+          unit: item.unit,
+          quantity: item.quantity,
+          price: item.price
+        })),
+        // orderDate: new Date().toLocaleDateString('sv-SE'),
+      }
+    };
+
+
+    // Skicka båda mailen
+    await Promise.all([
+      sgMail.send(companyMsg),
+      sgMail.send(customerMsg)
+    ]);
+
+    res.status(200).json({ message: "Order has been sent and confirmation email has been sent to customer!" });
   } catch (error) {
-    next(error); // Låt error middleware hantera felet
+    next(error);
   }
 };
 
