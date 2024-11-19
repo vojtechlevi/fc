@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { useCart } from "../utils/cartContext";
 import UserContext from "../utils/userContext";
+import { Check } from "lucide-react";
 
 export default function CartPage() {
   const { user, profile } = useContext(UserContext);
@@ -13,6 +14,7 @@ export default function CartPage() {
     updateCartItemUnit,
   } = useCart();
   const [message, setMessage] = useState("");
+  const [orderSent, setOrderSent] = useState(false);
 
   const name = profile.name;
   const email = user.email;
@@ -48,17 +50,58 @@ export default function CartPage() {
     setCartItems([]);
     const result = await response.json();
     setMessage(result.message);
+    setOrderSent(true);
   };
 
+  if (orderSent) {
+    return (
+      <div className=" flex items-center justify-center p-6">
+        <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg text-center">
+          <div className="mb-6">
+            <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+              <Check className="w-8 h-8 text-green-600" />
+            </div>
+          </div>
+
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            Tack för din beställning!
+          </h2>
+
+          <p className="text-gray-600 mb-6">
+            Din order har mottagits och kommer att behandlas så snart som
+            möjligt.
+          </p>
+
+          <div className="bg-gray-50 p-4 rounded-md mb-6">
+            <p className="text-sm text-gray-500">
+              Orderdetaljer har skickats till:
+              <br />
+              <span className="font-medium">{email}</span>
+            </p>
+          </div>
+
+          <button
+            onClick={() => {
+              setOrderSent(false);
+              window.location.href = "/";
+            }}
+            className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition-colors"
+          >
+            Fortsätt handla
+          </button>
+        </div>
+      </div>
+    );
+  }
   return (
-    <div className="min-h-screen  text-black p-6">
+    <div className="max-h-full overflow-scroll items-center justify-center p-6">
       <h1 className="text-3xl font-bold text-center mb-6">Varukorg</h1>
       {cartItems.length === 0 ? (
         <p className="text-center">Din varukorg är tom.</p>
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md"
+          className="max-h-[500px] overflow-scroll max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md"
         >
           <ul>
             {cartItems.map((item) => (

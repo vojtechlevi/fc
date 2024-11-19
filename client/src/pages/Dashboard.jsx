@@ -54,7 +54,7 @@ const Dashboard = () => {
     <>
       <div className="flex flex-col lg:flex-row min-h-screen mx-auto justify-center items-center max-w-[1440px] ">
         <Nav activeTab={activeTab} setActiveTab={setActiveTab} />
-        <div className="min-h-screen w-full pt-32 px-4 ">{renderContent()}</div>
+        <div className="min-h-screen w-full pt-24 px-4 ">{renderContent()}</div>
       </div>
     </>
   );
