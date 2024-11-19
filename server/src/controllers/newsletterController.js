@@ -46,26 +46,13 @@ const subscribe = async (req, res, next) => {
       throw new Error("Kunde inte lägga till prenumerant i listan");
     }
 
-    // 2. Skicka bekräftelsemail
-    const subscriberMsg = {
-      to: email,
-      from: "leviekstrom@fruktcentralen.se",
-      subject: "Tack för din prenumeration!",
-      html: `
-        <div>
-          <h2>Tack för din prenumeration!</h2>
-          <p>Vi ser fram emot att hålla dig uppdaterad med våra senaste nyheter och artiklar.</p>
-        </div>
-      `,
-    };
-
     const adminMsg = {
       to: "leviekstrom@fruktcentralen.se",
       from: "leviekstrom@fruktcentralen.se",
-      subject: "Ny Newsletter Prenumerant",
+      subject: "Ny Prenumerant på nyhetsbrevet",
       html: `
         <div>
-          <h2>Ny Newsletter Prenumerant</h2>
+          <h2>Nyhetsprenumerant Prenumerant</h2>
           <p>Email: ${email}</p>
         </div>
       `,
