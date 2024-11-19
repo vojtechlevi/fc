@@ -9,14 +9,7 @@ const sendOrder = async (req, res, next) => {
     }
 
     const formattedCartItems = cartItems
-<<<<<<< HEAD
-      .map((item) => `- ${item.name} (${item.unit}): ${item.quantity} kr`)
-=======
-      .map(
-        (item) =>
-          `- ${item.name} (${item.unit}): ${item.quantity}`
-      )
->>>>>>> f0909db0bff5e566cfd431a9580cb2cb3a377b37
+      .map((item) => `- ${item.name} (${item.unit}): ${item.quantity}`)
       .join("\n");
 
     // Mail till företaget
@@ -37,7 +30,7 @@ const sendOrder = async (req, res, next) => {
         orderDetails: cartItems.map((item) => ({
           itemName: item.name,
           unit: item.unit,
-          priceUnit: item.priceUnit,
+          priceUnit: item.priceunit,
           quantity: item.quantity,
           price: item.price,
         })),
@@ -48,12 +41,10 @@ const sendOrder = async (req, res, next) => {
     // Skicka båda mailen
     await Promise.all([sgMail.send(companyMsg), sgMail.send(customerMsg)]);
 
-    res
-      .status(200)
-      .json({
-        message:
-          "Order has been sent and confirmation email has been sent to customer!",
-      });
+    res.status(200).json({
+      message:
+        "Order has been sent and confirmation email has been sent to customer!",
+    });
   } catch (error) {
     next(error);
   }
