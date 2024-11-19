@@ -12,7 +12,7 @@ const sendOrder = async (req, res, next) => {
     const formattedCartItems = cartItems
       .map(
         (item) =>
-          `- ${item.name} (${item.unit}): ${item.quantity} kr`
+          `- ${item.name} (${item.unit}): ${item.quantity}`
       )
       .join("\n");
 
