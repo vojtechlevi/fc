@@ -1,7 +1,6 @@
 const sgMail = require("../config/sendgrid");
 
 const sendOrder = async (req, res, next) => {
-
   try {
     const { name, email, cartItems } = req.body;
 
@@ -10,10 +9,7 @@ const sendOrder = async (req, res, next) => {
     }
 
     const formattedCartItems = cartItems
-      .map(
-        (item) =>
-          `- ${item.name} (${item.unit}): ${item.quantity} kr`
-      )
+      .map((item) => `- ${item.name} (${item.unit}): ${item.quantity} kr`)
       .join("\n");
 
     // Mail till företaget
@@ -31,24 +27,26 @@ const sendOrder = async (req, res, next) => {
       templateId: "d-d709848908ac49b68c447a044756aba1",
       dynamicTemplateData: {
         name: name,
-        orderDetails: cartItems.map(item => ({
+        orderDetails: cartItems.map((item) => ({
           itemName: item.name,
           unit: item.unit,
+          priceUnit: item.priceUnit,
           quantity: item.quantity,
-          price: item.price
+          price: item.price,
         })),
         // orderDate: new Date().toLocaleDateString('sv-SE'),
-      }
+      },
     };
 
-
     // Skicka båda mailen
-    await Promise.all([
-      sgMail.send(companyMsg),
-      sgMail.send(customerMsg)
-    ]);
+    await Promise.all([sgMail.send(companyMsg), sgMail.send(customerMsg)]);
 
-    res.status(200).json({ message: "Order has been sent and confirmation email has been sent to customer!" });
+    res
+      .status(200)
+      .json({
+        message:
+          "Order has been sent and confirmation email has been sent to customer!",
+      });
   } catch (error) {
     next(error);
   }
