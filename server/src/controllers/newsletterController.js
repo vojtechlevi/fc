@@ -5,11 +5,15 @@ const client = require("@sendgrid/client");
 // Sätt API nyckeln för client också
 client.setApiKey(process.env.SENDGRID_API_KEY);
 
+const sanitizeHtml = require('sanitize-html');
+
 const subscribe = async (req, res, next) => {
 
 
   try {
     const { email } = req.body;
+
+    const sanitizedEmail = sanitizeHtml(email);
 
     if (!email) {
       return res.status(400).json({ message: "Email är obligatoriskt." });
@@ -20,7 +24,7 @@ const subscribe = async (req, res, next) => {
       list_ids: [process.env.SENDGRID_MAILING_ID],
       contacts: [
         {
-          email: email,
+          email: sanitizedEmail,
         },
       ],
     };
@@ -46,32 +50,19 @@ const subscribe = async (req, res, next) => {
       throw new Error("Kunde inte lägga till prenumerant i listan");
     }
 
-    // 2. Skicka bekräftelsemail
-    const subscriberMsg = {
-      to: email,
-      from: "leviekstrom@fruktcentralen.se",
-      subject: "Tack för din prenumeration!",
-      html: `
-        <div>
-          <h2>Tack för din prenumeration!</h2>
-          <p>Vi ser fram emot att hålla dig uppdaterad med våra senaste nyheter och artiklar.</p>
-        </div>
-      `,
-    };
-
     const adminMsg = {
-      to: "leviekstrom@fruktcentralen.se",
-      from: "leviekstrom@fruktcentralen.se",
-      subject: "Ny Newsletter Prenumerant",
+      to: process.env.FC_ADMIN_MAIL,
+      from: process.env.FC_SENDER_MAIL,
+      subject: "Ny Prenumerant på nyhetsbrevet",
       html: `
         <div>
-          <h2>Ny Newsletter Prenumerant</h2>
-          <p>Email: ${email}</p>
+          <h2>Nyhetsprenumerant</h2>
+          <p>Email: ${sanitizedEmail}</p>
         </div>
       `,
     };
 
-    await Promise.all([sgMail.send(subscriberMsg), sgMail.send(adminMsg)]);
+    await sgMail.send(adminMsg);
 
     res.status(200).json({ message: "Prenumeration lyckades!" });
   } catch (error) {

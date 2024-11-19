@@ -9,7 +9,14 @@ const sendOrder = async (req, res, next) => {
     }
 
     const formattedCartItems = cartItems
+<<<<<<< HEAD
       .map((item) => `- ${item.name} (${item.unit}): ${item.quantity} kr`)
+=======
+      .map(
+        (item) =>
+          `- ${item.name} (${item.unit}): ${item.quantity}`
+      )
+>>>>>>> f0909db0bff5e566cfd431a9580cb2cb3a377b37
       .join("\n");
 
     // Mail till företaget
