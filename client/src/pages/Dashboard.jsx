@@ -6,7 +6,7 @@ import { Nav } from "../components/Navbar";
 import Profile from "../components/Profile";
 import ProductList from "../components/ProductList";
 import CartPage from "../components/Cart";
-import PdfViewer from "../components/PdfViewer";
+import DocumentGallery from "../components/DocumentGallery";
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("shop");
   const { user, profile, setProfile } = useContext(UserContext);
@@ -38,7 +38,7 @@ const Dashboard = () => {
       case "shop":
         return <ProductList />;
       case "kampanjer":
-        return <PdfViewer />;
+        return <DocumentGallery />;
       case "prislista":
         return <div>Prislista Content</div>;
       case "cart":
