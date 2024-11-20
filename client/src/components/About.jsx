@@ -12,7 +12,7 @@ function About() {
         id="about"
         className="snap-end  flex flex-col items-center justify-center gap-8 lg:gap-16 mx-auto my-24 max-w-[1440px] px-6 lg:my-32 lg:px-16"
       >
-        <div className="items-center justify-items-between px-4 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-10">
+        <div className="items-center justify-items-center px-4 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-10">
           <div className="flex flex-col gap-6 order-2 lg:order-1">
             <h2 className="text-4xl font-bold md:text-5xl">Om oss</h2>
             <article className="flex flex-col gap-4">
@@ -88,7 +88,7 @@ function About() {
         id="sustainability"
         className="snap-end  flex flex-col items-center justify-center gap-8 lg:gap-16 mx-auto my-24 max-w-[1440px] px-6 lg:my-32 lg:px-16"
       >
-        <div className="items-center justify-items-between px-4 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-10 ">
+        <div className="items-center justify-items-center px-4 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-10 ">
           <img
             alt="Bild för text blocket"
             loading="lazy"
